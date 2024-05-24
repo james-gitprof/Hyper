@@ -15,14 +15,17 @@ jobs:
       - name: Checkout to code
         uses: actions/checkout@v4.1.5
 
-      - name: Setup JDK
+      - name: Setup JDK environment
         uses: actions/setup-java@v4.2.1
+        with:
+          java-version: '17'
+          distribution: 'adopt'
 
-      - name: Build with gradle
+      - name: Build gradle
         run: ./gradlew build
 
       - name: Create and upload build
         uses: actions/upload-artifact@v4.3.3
         with:
           name: Hyper.apk
-          path: app/build/outputs/apk/app-debug.apk
+          path: app/build/outputs/apk/debug/app-debug.apk
