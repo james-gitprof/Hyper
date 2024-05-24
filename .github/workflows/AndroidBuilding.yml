@@ -1,3 +1,28 @@
 # Do not modify this, this is managed by the integrator (me), which is the owner of repository.
 # Modify this, CI tasks is doomed. Please be advised.
 
+name: Build
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout to code
+        uses: actions/checkout@v4.1.5
+
+      - name: Setup JDK
+        uses: actions/setup-java@v4.2.1
+
+      - name: Build with gradle
+        run: ./gradlew build
+
+      - name: Create and upload build
+        uses: actions/upload-artifact@v4.3.3
+        with:
+          name: Hyper.apk
+          path: app/build/outputs/apk/app-debug.apk
