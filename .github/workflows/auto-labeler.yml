@@ -1,0 +1,21 @@
+# Do not modify this, this is managed by the integrator (me)
+# Modify this, I'm gonna hunt u. Please be advised.
+
+name: PR Labeler
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  assign-label:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Assign label to PR
+        uses: actions-ecosystem/action-add-labels@v1.1.0
+        with:
+          labels: |
+            feature
+            pending
+            

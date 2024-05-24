@@ -1,0 +1,22 @@
+# Do not modify this, this is managed by the integrator (me), which is the owner of repository.
+# Modify this, I'm gonna hunt u. Please be advised.
+
+name: Code quality check
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  Lint code:
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/checkout@v4.1.5
+
+      - name: Execute linter on code
+        uses: super-linter/super-linter@v5.7.2
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          VALIDATE_YAML: false
+
+

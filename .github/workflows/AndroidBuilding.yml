@@ -1,7 +1,7 @@
 # Do not modify this, this is managed by the integrator (me), which is the owner of repository.
-# Modify this, CI tasks is doomed. Please be advised.
+# Modify this, CI and CD tasks are doomed. Please be advised.
 
-name: Build
+name: Project assembly
 on:
   pull_request:
     branches: [master]
@@ -9,11 +9,13 @@ on:
     branches: [master]
 
 jobs:
-  build:
+  Build Project:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout to code
         uses: actions/checkout@v4.1.5
+        with:
+          fetch-depth: 0
 
       - name: Setup JDK environment
         uses: actions/setup-java@v4.2.1
@@ -24,10 +26,10 @@ jobs:
       - name: Gradle permission fix
         run: chmod +x gradlew
 
-      - name: Build project in Gradle
+      - name: Build project using Gradle
         run: ./gradlew build
 
-      - name: Build APK
+      - name: Deploy application
         uses: actions/upload-artifact@v4.3.3
         with:
           name: Hyper.apk
