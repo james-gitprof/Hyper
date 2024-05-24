@@ -35,13 +35,3 @@ jobs:
         with:
           name: Hyper.apk
           path: app/build/outputs/apk/debug/app-debug.apk
-
-      - name: Deploy local application build
-        uses: peter-evans/create-or-update-comment@v4.0.0
-        with:
-          issue-number:  ${{ github.event.pull_request.number }}
-          body: |
-            Application build successful for your changes!
-          reactions: |
-            heart
-            hooray

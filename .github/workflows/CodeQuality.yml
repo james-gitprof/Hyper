@@ -5,6 +5,8 @@ name: Code quality check
 on:
   workflow_dispatch:
   push:
+    branches-ignore:
+      - master
 
 jobs:
   lintcode:
