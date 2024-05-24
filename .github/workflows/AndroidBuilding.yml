@@ -9,7 +9,7 @@ on:
     branches: [master]
 
 jobs:
-  Build Project:
+  assembly:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout to code
@@ -29,8 +29,19 @@ jobs:
       - name: Build project using Gradle
         run: ./gradlew build
 
-      - name: Deploy application
+      - name: Build application
+        id: build-artifact
         uses: actions/upload-artifact@v4.3.3
         with:
           name: Hyper.apk
           path: app/build/outputs/apk/debug/app-debug.apk
+
+      - name: Deploy local application build
+        uses: peter-evans/create-or-update-comment@v4.0.0
+        with:
+          issue-number:  ${{ github.event.pull_request.number }}
+          body: |
+            Application build successful for your changes!
+          reactions: |
+            heart
+            hooray
