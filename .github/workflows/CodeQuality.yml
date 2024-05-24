@@ -7,7 +7,7 @@ on:
   push:
 
 jobs:
-  Lint code:
+  lintcode:
     runs-on: ubuntu-latest
     steps:
 
