@@ -39,7 +39,7 @@ jobs:
         id: artifact-json
         uses: octokit/request-action@v2.3.1
         with:
-          route: GET /repos/${{ github.repository }}/actions/artifacts/${{ needs.fetch-build-artifact-id.outputs.accomplished-build-artifact }}
+          route: GET /repos/${{ github.repository }}/actions/artifacts/${{ needs.fetch-build-artifact-id.outputs.build-artifact-id }}
           owner: ${{ github.repository_owner }}
           repo: ${{ github.event.repository.name }}
         env:
