@@ -1,0 +1,21 @@
+# Do not modify this, this is managed by the integrator (me), which is the owner of repository.
+# Modify this, CI and CD tasks are doomed. Please be advised.
+
+name: Assemble project in master branch
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+
+jobs:
+  checkout-to-current-branch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4.1.5
+
+  begin-build-assembly:
+    uses: ./.github/workflows/ReusableProjectAssembly.yml
