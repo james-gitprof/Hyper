@@ -17,10 +17,10 @@ jobs:
       - name: Checkout to code
         uses: actions/checkout@v4.1.5
 
-      - name: Wait until all checks are green
+      - name: Waits until code quality is checked
         uses: lewagon/wait-on-check-action@v1.3.4
         with:
-          ref: ${{ github.ref }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           check-name: lintcode
           repo-token: ${{ secrets.github_token }}
           wait-interval: 15
