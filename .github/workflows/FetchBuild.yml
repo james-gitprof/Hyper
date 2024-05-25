@@ -54,13 +54,14 @@ jobs:
           body: |
             [This is an automated bot of @${{ github.repository_owner }}, CI/CD implementer of this repository.]
             
-            ##🎉Build successful for your recent commit(s)🎉. 
-            Thank you for your contribution.
-            Please wait for the assigned reviewer or integrator to approve your commits before changes
-            gets merged/integrated into main branch.
+            ## 🎉Build successful for your recent commit(s)🎉.
+            > [!NOTE]
+            > It may take some time before the reviewer/integrator can get to you.
             
-            Meanwhile, you can test out your changes by downloading the built application,
-            through the APK Build Artifact link.
+            Thank you for your contribution.
+            
+            > [!TIP]
+            > Your APK file is available for download.
             
             **Size (in bytes)**:
             ${{ fromJSON(steps.artifact-json.outputs.data).size_in_bytes }}
