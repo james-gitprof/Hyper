@@ -1,0 +1,78 @@
+# Do not modify this, this is managed by the integrator (me), which is the owner of repository.
+# This is responsible for putting out builds which you can test when you make or modify your PRs
+# (pull requests)
+
+name: Deploy temporary build to PR
+on:
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  actions: read
+
+jobs:
+  status_checks:
+    runs-on: ubuntu-latest
+    name: Wait for code quality check to complete
+    steps:
+      - name: Checkout to code
+        uses: actions/checkout@v4.1.5
+
+      - name: Waits until code quality is checked
+        uses: lewagon/wait-on-check-action@v1.3.4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          check-name: lintcode
+          repo-token: ${{ secrets.github_token }}
+          wait-interval: 15
+          allowed-conclusions: success
+
+  fetch-build-artifact-id:
+    uses: ./.github/workflows/ReusableProjectAssembly.yml
+    needs: status_checks
+
+  rest-api-call:
+    needs: fetch-build-artifact-id
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Send GET request to Github REST API
+        id: artifact-json
+        uses: octokit/request-action@v2.3.1
+        with:
+          route: GET /repos/${{ github.repository }}/actions/artifacts/${{ needs.fetch-build-artifact-id.outputs.build-artifact-id }}
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.event.repository.name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.github_token }}
+
+      - name: Notify PR request of build
+        uses: peter-evans/create-or-update-comment@v4.0.0
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            This is a bot speaking on behalf of @${{ github.repository_owner }}, CI/CD implementer of this task.
+            Build successful for your recent commit(s).
+            
+            Expiration: 1 minute (according to GitHub's Artifact REST API documentation)
+            
+            **Size (in bytes)**:
+            ${{ fromJSON(steps.artifact-json.outputs.data).size_in_bytes }}
+
+            APK Build Artifact: ${{ fromJSON(steps.artifact-json.outputs.data).archive_download_url }}
+            
+
+          reactions: |
+            heart
+            hooray
+
+
+
+
+
+
+
+
+
