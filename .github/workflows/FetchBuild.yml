@@ -24,6 +24,7 @@ jobs:
           running-workflow-name: 'Wait for greens'
           repo-token: ${{ secrets.github_token }}
           wait-interval: 15
+          allowed-conclusions: success
 
   fetch-build-artifact-id:
     uses: ./.github/workflows/ReusableProjectAssembly.yml
@@ -43,7 +44,7 @@ jobs:
           repo: ${{ github.event.repository.name }}
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
-          artifact-object: $${{ steps.artifact-json.outputs.data}}
+          artifact-object: ${{ steps.artifact-json.outputs.data}}
 
       - name: Notify PR request of build
         uses: peter-evans/create-or-update-comment@v4.0.0
