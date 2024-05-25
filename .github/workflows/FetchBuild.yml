@@ -44,12 +44,6 @@ jobs:
           repo: ${{ github.event.repository.name }}
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
-          artifact-object: ${{ steps.artifact-json.outputs.data}}
-
-      - name: Debug logger
-        uses: hmarr/debug-action@v3.0.0
-
-      - run: echo "JSON ${{ env.artifact-object }}"
 
       - name: Notify PR request of build
         uses: peter-evans/create-or-update-comment@v4.0.0
@@ -58,10 +52,10 @@ jobs:
           body: |
             This is a bot speaking on behalf of ${{ github.repository_owner }}
             Build successful for your recent commit(s). You can download it from here:
-            ${{ fromJSON(env.artifact-object).archive_download_url}}
+            ${{ fromJSON(steps.artifact-json.outputs.data).archive_download_url}}
             
             Size:
-            ${{ fromJSON(env.artifact-object).size_in_bytes }}
+            ${{ fromJSON(steps.artifact-json.outputs.data).size_in_bytes }}
 
           reactions: |
             heart
