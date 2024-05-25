@@ -42,3 +42,4 @@ jobs:
       - name: Produce artifact ID
         id: output-artifact-step
         run: echo "output_id=${{ steps.build-artifact.outputs.artifact-id }}" >> $GITHUB_OUTPUT
+
