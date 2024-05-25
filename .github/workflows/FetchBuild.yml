@@ -48,6 +48,7 @@ jobs:
 
       - name: Debug logger
         uses: hmarr/debug-action@v3.0.0
+        run: echo "JSON ${{ env.artifact-object }}"
 
       - name: Notify PR request of build
         uses: peter-evans/create-or-update-comment@v4.0.0
