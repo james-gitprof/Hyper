@@ -36,6 +36,7 @@ jobs:
   rest-api-call:
     needs: fetch-build-artifact-id
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
 
       - name: Send GET request to Github REST API
