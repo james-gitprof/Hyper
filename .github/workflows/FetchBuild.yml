@@ -22,7 +22,7 @@ jobs:
         with:
           ref: ${{ github.ref }}
           running-workflow-name: 'Wait for greens'
-          repo-token: $ {{ secrets.github_token }}
+          repo-token: ${{ secrets.github_token }}
           wait-interval: 15
 
   fetch-build-artifact-id:
