@@ -1,3 +1,9 @@
+buildscript {
+    repositories {
+        google()
+    }
+}
+
 plugins {
     alias(libs.plugins.android.application)
     id 'com.google.gms.google-services'
@@ -7,6 +13,7 @@ plugins {
 android {
     namespace 'com.example.carcab'
     compileSdk 34
+
 
     defaultConfig {
         applicationId "com.example.carcab"
@@ -22,6 +29,7 @@ android {
     }
 
     buildTypes {
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -50,6 +58,7 @@ android {
 dependencies {
     implementation platform('com.google.firebase:firebase-bom:33.1.0')
     implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.android.material:material:1.12.0'
     implementation libs.appcompat
     implementation libs.material
     implementation libs.activity
