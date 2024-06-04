@@ -5,73 +5,10 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Authentication"
+    tools:context=".LibAuthentication.AuthActivities.Authentication"
     android:gravity="center">
 
-    <!--
-     TODO: Replace hard-coded text with values from strings.xml
-    -->
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="24dp"
-        android:orientation="vertical"
-        android:id="@+id/auth_login_header"
-        android:gravity="center">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hyper"
-            android:layout_marginTop="8dp"
-            android:textSize="16sp"
-            />
-    </LinearLayout>
-
-    <!--
-    TODO: Add sprinkle of designs
-    Also, consider looking in Material Designs by Google for simple widgets
-    like Buttons and EditText
-    -->
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_marginVertical="12dp"
-        android:layout_below="@id/auth_login_header"
-        android:paddingHorizontal="32dp">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Username"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:hint="Password"/>
-
-        <Button
-            android:layout_width="128dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="Login"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="Tap to register"
-            android:textColor="@color/bluish"/>
-    </LinearLayout>
 
 </RelativeLayout>

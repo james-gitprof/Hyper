@@ -1,3 +1,15 @@
 <resources>
-    <string name="app_name">Hyper</string>
+    <string name="App_Name">CarCab</string>
+    <string name="Fragment_Authentication_Login">Login</string>
+    <string name="Fragment_Authentication_Login_Header">User Login</string>
+
+    <string name="Fragment_Authentication_Register">Register</string>
+    <string name="Fragment_Authentication_Register_Header">User Registration</string>
+
+    <string name="Authentication_Hint_Email">E-mail</string>
+    <string name="Authentication_Hint_Confirmation_Password">Confirm Password</string>
+    <string name="Authentication_Hint_Password">Password</string>
+
+    <string name="Authentication_Card_Person">Customer</string>
+    <string name="Authentication_Card_Driver">Driver</string>
 </resources>
