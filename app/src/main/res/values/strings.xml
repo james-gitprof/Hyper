@@ -21,4 +21,6 @@
 
     <string name="Authentication_Card_Person">Customer</string>
     <string name="Authentication_Card_Driver">Driver</string>
+
+    <string name="Authentication_Greeter">Welcome!</string>
 </resources>
