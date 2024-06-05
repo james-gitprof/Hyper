@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        mavenCentral()
         google()
     }
 }
@@ -55,11 +56,15 @@ android {
 }
 
 dependencies {
+<<<<<<< maps
+    implementation 'org.osmdroid:osmdroid-android:6.1.18'
+=======
     def LIFECYCLE_VERSION = "2.8.1"
 
     implementation "androidx.lifecycle:lifecycle-viewmodel:$LIFECYCLE_VERSION"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$LIFECYCLE_VERSION"
 
+>>>>>>> unstable
     implementation platform('com.google.firebase:firebase-bom:33.1.0')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.android.material:material:1.12.0'
