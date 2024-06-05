@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/elysian-dawnbreaker/Hyper/issues"
   },
-  "homepage": "https://github.com/elysian-dawnbreaker/Hyper#readme"
+  "homepage": "https://github.com/elysian-dawnbreaker/Hyper#readme",
+  "devDependencies": {
+    "@semantic-release/git": "^10.0.1",
+    "semantic-release": "^24.0.0"
+  }
 }
