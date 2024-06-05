@@ -6,6 +6,7 @@ public abstract class LocatableUser extends User implements IConfigurableLocatab
     protected Location userLocation;
     public LocatableUser(String email, String password) {
         super(email, password);
+
     }
 
     @Override
