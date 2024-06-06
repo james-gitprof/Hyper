@@ -29,10 +29,10 @@ jobs:
       pull-requests: write
     needs: APK-Builder
     steps:
-      - name: Install pre-requisities
-        run: npm install -g npm && npm install -g node
+      - name: Setup Node.js
+        uses: actions/setup-node@v4.0.2
 
-
+      - run: npm ci
 
       - name: Download built artifact
         uses: actions/download-artifact@v4.1.7
