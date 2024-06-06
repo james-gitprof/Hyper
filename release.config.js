@@ -15,7 +15,6 @@ const config = {
     "@semantic-release/github",
     ["@semantic-release/git", {
     "assets": ["*.apk"], // get anything that has .apk file, should be in $GITHUB_WORKSPACE of the runner
-    "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
     }]
     ]
 }
