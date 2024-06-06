@@ -9,6 +9,9 @@ on:
       - master
   workflow_dispatch:
 
+permissions:
+  actions: read
+
 jobs:
   status_checks:
     runs-on: ubuntu-latest
@@ -33,6 +36,7 @@ jobs:
   rest-api-call:
     needs: fetch-build-artifact-id
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
 
       - name: Send GET request to Github REST API
@@ -56,13 +60,30 @@ jobs:
             
             Size:
             ${{ fromJSON(steps.artifact-json.outputs.data).size_in_bytes }}
+            [This is an automated bot of @${{ github.repository_owner }}, CI/CD implementer of this repository.]
+            
+            ## 🎉Build successful for your recent commit(s)🎉.
+            > [!NOTE]
+            > It may take some time before the reviewer/integrator can get to you.
+            
+            Thank you for your contribution.
+            
+            > [!TIP]
+            > Your APK file is available for download.
+            
+            **Size (in bytes)**:
+            ${{ fromJSON(steps.artifact-json.outputs.data).size_in_bytes }}
+            
+            Build logs: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+            Your APK Build Artifact: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts/${{ needs.fetch-build-artifact-id.outputs.build-artifact-id }}
+            
 
           reactions: |
             heart
             hooray
 
-
-
+  #${{ fromJSON(steps.artifact-json.outputs.data).archive_download_url }}
 
 
 

@@ -1,0 +1,33 @@
+# For testing purposes.
+# Remember to change it with something else afterwards..!
+
+name: Release Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Release-Preparer:
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout to branch
+        uses: actions/checkout@v4.1.5
+
+      - name: Build APK artifact
+        uses: ./.github/workflows/ReusableProjectAssembly.yml
+
+      - name: Download built artifact
+        uses: actions/download-artifact@v4.1.7
+        with:
+          name: Hyper.apk
+          path: $GITHUB_WORKSPACE
+          github-token: ${{ secrets.github_token }}
+
+      - name: Execute semantic-release
+        run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.github_token }}
