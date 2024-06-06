@@ -20,6 +20,7 @@ jobs:
       name: Build APK artifact
       uses: ./.github/workflows/ReusableProjectAssembly.yml
 
+
   Releaser:
     runs-on: ubuntu-latest
     permissions:
@@ -28,6 +29,11 @@ jobs:
       pull-requests: write
     needs: APK-Builder
     steps:
+      - name: Install pre-requisities
+        run: npm install -g npm && npm install -g node
+
+
+
       - name: Download built artifact
         uses: actions/download-artifact@v4.1.7
         with:
