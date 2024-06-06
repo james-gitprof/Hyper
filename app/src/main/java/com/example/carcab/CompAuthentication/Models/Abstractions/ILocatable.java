@@ -4,6 +4,6 @@ import com.example.carcab.CompAuthentication.Models.Location;
 
 public interface ILocatable {
 
-    public Location getEntityLocation();
+    public ILocatable getEntityLocation();
 
 }
