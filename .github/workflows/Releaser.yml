@@ -4,6 +4,9 @@
 name: Release Build
 
 on:
+  push:
+    branches:
+      - integrator-testing
   workflow_dispatch:
 
 jobs:
