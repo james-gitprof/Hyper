@@ -22,8 +22,10 @@ jobs:
         env:
           VALIDATE_ALL_CODEBASE: false
           VALIDATE_YAML: false
-          # the .js files is used for config files, there's no need to check them
+          # the following parameters are for automation only, there's no need to check them
+          # as the focus lies on development code, java
           VALIDATE_JAVASCRIPT_STANDARD: false
           VALIDATE_JAVASCRIPT_ES: false
+          VALIDATE_GITHUB_ACATIONS: false
 
 

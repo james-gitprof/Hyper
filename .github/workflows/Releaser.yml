@@ -10,19 +10,24 @@ on:
   workflow_dispatch:
 
 jobs:
-  Release-Preparer:
-    permissions:
-      contents: write
-      issues: write
-      pull-requests: write
+  Branch Checkouter:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout to branch
         uses: actions/checkout@v4.1.5
 
-      - name: Build APK artifact
-        uses: ./.github/workflows/ReusableProjectAssembly.yml
+  APK-Builder:
+    - name: Build APK artifact
+      uses: ./.github/workflows/ReusableProjectAssembly.yml
 
+  Releaser:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    needs: APK-Builder
+    steps:
       - name: Download built artifact
         uses: actions/download-artifact@v4.1.7
         with:
