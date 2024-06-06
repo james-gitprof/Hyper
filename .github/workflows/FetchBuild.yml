@@ -44,6 +44,8 @@ jobs:
         uses: octokit/request-action@v2.3.1
         with:
           route: GET /repos/${{ github.repository }}/actions/artifacts/${{ needs.fetch-build-artifact-id.outputs.build-artifact-id }}
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.event.repository.name }}
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
 
@@ -74,7 +76,6 @@ jobs:
           reactions: |
             heart
             hooray
-
 
   #${{ fromJSON(steps.artifact-json.outputs.data).archive_download_url }}
 

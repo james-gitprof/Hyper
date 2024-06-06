@@ -1,0 +1,32 @@
+{
+  "name": "hyperappdev",
+  "version": "1.0.0",
+  "description": "For semantic-release automation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elysian-dawnbreaker/Hyper.git"
+  },
+  "keywords": [
+    "school-project"
+  ],
+  "author": "elysian-dawnbreaker",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elysian-dawnbreaker/Hyper/issues"
+  },
+  "homepage": "https://github.com/elysian-dawnbreaker/Hyper#readme",
+  "devDependencies": {
+    "@semantic-release/git": "^10.0.1",
+    "cz-conventional-changelog": "^3.3.0",
+    "semantic-release": "^24.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}

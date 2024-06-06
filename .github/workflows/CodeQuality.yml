@@ -14,11 +14,16 @@ jobs:
     steps:
 
       - uses: actions/checkout@v4.1.5
+        with:
+          fetch-depth: 0
 
       - name: Execute linter on code
         uses: super-linter/super-linter@v5.7.2
         env:
           VALIDATE_ALL_CODEBASE: false
           VALIDATE_YAML: false
+          # the .js files is used for config files, there's no need to check them
+          VALIDATE_JAVASCRIPT_STANDARD: false
+          VALIDATE_JAVASCRIPT_ES: false
 
 
