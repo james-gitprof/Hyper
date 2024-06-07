@@ -6,7 +6,7 @@ import com.example.carcab.CompAuthentication.Models.Abstractions.ILocatable;
 import com.example.carcab.CompAuthentication.Models.Abstractions.LocatableUser;
 import com.example.carcab.CompAuthentication.Models.Abstractions.User;
 
-public class Driver extends LocatableUser {
+public class Driver extends User {
 
     private IDrivable driverCar;
 

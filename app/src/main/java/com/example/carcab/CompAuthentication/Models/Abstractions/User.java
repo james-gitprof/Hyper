@@ -10,6 +10,16 @@ public abstract class User {
         this.passwordCredential = passwordCredential;
     }
 
+    public void setEmailCredential(String credential)
+    {
+        this.emailCredential = credential;
+    }
+
+    public void setPasswordCredential(String passCredential)
+    {
+        this.passwordCredential = passwordCredential;
+    }
+
     public String getUserEmail()
     {
         return this.emailCredential;

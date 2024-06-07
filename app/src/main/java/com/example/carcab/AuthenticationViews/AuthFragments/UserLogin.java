@@ -1,4 +1,4 @@
-package com.example.carcab.LibAuthentication.AuthFragments;
+package com.example.carcab.AuthenticationViews.AuthFragments;
 
 import android.os.Bundle;
 
@@ -11,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.carcab.AuthenticationViews.Abstractions.AuthFragment;
+import com.example.carcab.CompAuthentication.ViewModels.AuthenticationViewModel;
+import com.example.carcab.AuthenticationViews.Abstractions.SwitchableFragment;
 import com.example.carcab.R;
 
 /**
@@ -18,7 +21,7 @@ import com.example.carcab.R;
  * Use the {@link UserLogin#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UserLogin extends SwitchableFragment {
+public class UserLogin extends AuthFragment {
 
     public UserLogin() {
         // Required empty public constructor

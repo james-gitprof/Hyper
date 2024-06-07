@@ -1,22 +1,19 @@
-package com.example.carcab.LibAuthentication.AuthFragments;
+package com.example.carcab.AuthenticationViews.AuthFragments;
 
 import android.os.Bundle;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.carcab.AuthenticationViews.Abstractions.AuthFragment;
 import com.example.carcab.R;
 
-public class UserAuthLanding extends SwitchableFragment {
+public class UserAuthLanding extends AuthFragment {
 
     public UserAuthLanding() {
         // Required empty public constructor
