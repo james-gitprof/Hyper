@@ -15,6 +15,8 @@ import com.example.carcab.AuthenticateFeature.AuthenticationComponents.ViewModel
 import com.example.carcab.AuthenticateFeature.AuthenticationViews.Abstractions.AuthFragment;
 import com.example.carcab.R;
 
+import org.checkerframework.checker.units.qual.A;
+
 public class UserAuthLanding extends AuthFragment {
 
     public UserAuthLanding() {
@@ -25,9 +27,7 @@ public class UserAuthLanding extends AuthFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
-        mAuthViewModel = new ViewModelProvider(this).get(AuthenticationViewModel.class);
+        mAuthViewModel = AuthenticationViewModel.getInstance();
         return inflater.inflate(R.layout.fragment_user_auth_landing, container, false);
     }
 

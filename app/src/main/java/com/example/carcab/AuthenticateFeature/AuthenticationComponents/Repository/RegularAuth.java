@@ -75,7 +75,8 @@ public class RegularAuth implements IAuthenticate {
                             }
                         }
                     }
-                }).isSuccessful();
+                })
+                .isSuccessful();
         return registerResult;
     }
 

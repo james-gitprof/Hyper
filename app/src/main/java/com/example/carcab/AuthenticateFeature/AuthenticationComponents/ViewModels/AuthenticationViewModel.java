@@ -13,23 +13,11 @@ import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Repositor
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Repository.RegularAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class AuthenticationViewModel extends ViewModel {
+public class AuthenticationViewModel {
 
-    /*
-    !! THIS CLASS MUST NOT HOLD ANY REFERENCE TO ANY ACTIVITY OR SIMILAR CONTEXT !!
-    !! DOING SO MAY CAUSE MEMORY LEAKS !!
-
-    OK, so wtf is this?
-
-    Read here, boah.
-    https://developer.android.com/topic/libraries/architecture/viewmodel
-
-    Business logic goes in this class.
-    For authentication-related stuff only.
-     */
     private static AuthenticationViewModel mSelfAuthVM;
-    private final MutableLiveData<FirebaseUser> userInSession = new MutableLiveData<>();
-    private final MutableLiveData<UserInfo> userMetadata = new MutableLiveData<>();
+    FirebaseUser userInSession;
+    UserInfo userMetadata;
     private IAuthenticate authenticator;
     private AuthenticationViewModel()
     {
@@ -61,7 +49,7 @@ public class AuthenticationViewModel extends ViewModel {
             IDataFinder<String> finder = new DatabaseDriverFinder();
             boolean findDriver = finder.isAvailable(userUID);
             userData.setDriver(findDriver);
-            userMetadata.setValue(userData);
+            userMetadata = userData;
         }
         return loginResult;
     }
@@ -79,10 +67,11 @@ public class AuthenticationViewModel extends ViewModel {
                     }
                 });
             }
-            userMetadata.setValue(user);
-            if (getAuthenticator().performRegister(user))
+            userMetadata = user;
+            boolean status = getAuthenticator().performRegister(user);
+            if (status)
             {
-                userInSession.setValue(FirebaseConnector.getInstance().getFirebaseAuthInstance().getCurrentUser());
+                userInSession = FirebaseConnector.getInstance().getFirebaseAuthInstance().getCurrentUser();
                 return true;
             }
         }
@@ -99,14 +88,5 @@ public class AuthenticationViewModel extends ViewModel {
         return this.authenticator;
     }
 
-    public LiveData<FirebaseUser> getUserInSession() // use observe() to get state at any time
-    {
-        return userInSession;
-    }
-
-    public LiveData<UserInfo> getUserMetadata()
-    {
-        return userMetadata;
-    }
 
 }

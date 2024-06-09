@@ -12,7 +12,7 @@ public abstract class AuthFragment extends SwitchableFragment {
 
     public AuthFragment()
     {
-        Log.d("AUTH_FRAGMENT", "View Model initialized. From class " + this.getClass().toString());
+
     }
 
 
