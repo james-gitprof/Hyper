@@ -1,4 +1,4 @@
-package com.example.carcab.AuthenticationViews.AuthActivities;
+package com.example.carcab.AuthenticateFeature.AuthenticationViews.AuthActivities;
 
 import android.content.Intent;
 import android.os.Bundle;

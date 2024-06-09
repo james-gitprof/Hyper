@@ -1,6 +1,8 @@
-package com.example.carcab.CompAuthentication.Repository;
+package com.example.carcab.AuthenticateFeature.AuthenticationComponents.Repository;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class FirebaseConnector {
 
@@ -9,10 +11,12 @@ public class FirebaseConnector {
      */
     private static FirebaseConnector mSelfFirebase;
     private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
 
     private FirebaseConnector()
     {
-        // dont allow others to instantiate multiple instances of this thing
+        this.mAuth = FirebaseAuth.getInstance();
+        this.mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
     public static FirebaseConnector getInstance()
@@ -27,6 +31,11 @@ public class FirebaseConnector {
     public FirebaseAuth getFirebaseAuthInstance()
     {
         return this.mAuth;
+    }
+
+    public DatabaseReference getFirebaseDatabaseInstance()
+    {
+        return this.mDatabase;
     }
 
 

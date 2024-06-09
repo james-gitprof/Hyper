@@ -1,4 +1,4 @@
-package com.example.carcab.AuthenticationViews.AuthFragments;
+package com.example.carcab.AuthenticateFeature.AuthenticationViews.AuthFragments;
 
 import android.os.Bundle;
 
@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.carcab.AuthenticationViews.Abstractions.AuthFragment;
+import com.example.carcab.AuthenticateFeature.AuthenticationViews.Abstractions.AuthFragment;
 import com.example.carcab.R;
 
 public class UserAuthLanding extends AuthFragment {

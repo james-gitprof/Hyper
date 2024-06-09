@@ -1,8 +1,8 @@
-package com.example.carcab.AuthenticationViews.Abstractions;
+package com.example.carcab.AuthenticateFeature.AuthenticationViews.Abstractions;
 
 import android.util.Log;
 
-import com.example.carcab.CompAuthentication.ViewModels.AuthenticationViewModel;
+import com.example.carcab.AuthenticateFeature.AuthenticationComponents.ViewModels.AuthenticationViewModel;
 
 public abstract class AuthFragment extends SwitchableFragment {
 

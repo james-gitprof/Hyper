@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".AuthenticationViews.AuthFragments.UserRegister"
+    tools:context=".AuthenticateFeature.AuthenticationViews.AuthFragments.UserRegister"
     android:gravity="center">
 
     <!--

@@ -1,4 +1,4 @@
-package com.example.carcab.CompAuthentication.Models.Abstractions;
+package com.example.carcab.AuthenticateFeature.AuthenticationComponents.Models.Abstractions;
 
 public abstract class User {
     protected String emailCredential;

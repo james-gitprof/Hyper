@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AuthenticationViews.AuthActivities.Authentication">
+    tools:context=".AuthenticateFeature.AuthenticationViews.AuthActivities.Authentication">
 
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/authFragmentContainer"
-        android:name="com.example.carcab.AuthenticationViews.AuthFragments.UserAuthLanding"
+        android:name="com.example.carcab.AuthenticateFeature.AuthenticationViews.AuthFragments.UserAuthLanding"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>
