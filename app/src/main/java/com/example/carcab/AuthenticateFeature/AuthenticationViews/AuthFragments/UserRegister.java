@@ -1,22 +1,25 @@
 package com.example.carcab.AuthenticateFeature.AuthenticationViews.AuthFragments;
 
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.carcab.AuthenticateFeature.AuthenticationComponents.ViewModels.AuthenticationViewModel;
 import com.example.carcab.AuthenticateFeature.AuthenticationViews.Abstractions.AuthFragment;
 import com.example.carcab.R;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +51,52 @@ public class UserRegister extends AuthFragment {
         int[] cardViewIds = {R.id.driver_card, R.id.customer_card};
 
         setupTextListeners();
-        setupRegisterCardListeners(cardViewIds);
+        setupRegisterCardListenersEnMasse(cardViewIds);
+        setupButtonListeners();
+    }
+
+    private void setupButtonListeners()
+    {
+        Button registerBtn = getView().findViewById(R.id.registerbtn);
+        EditText registerEmailField = ((TextInputLayout) getView().findViewById(R.id.register_email_field)).getEditText();
+        EditText registerPasswordField = ((TextInputLayout) getView().findViewById(R.id.register_password_field)).getEditText();
+        EditText registerConfirmPasswordField = ((TextInputLayout) getView().findViewById(R.id.register_confirmpassword_field)).getEditText();
+        registerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LinearProgressIndicator progressBar = getView().findViewById(R.id.register_progress);
+                progressBar.setVisibility(View.VISIBLE);
+                String email = registerEmailField.getText().toString();
+                String password = registerPasswordField.getText().toString();
+                String confirmPassword = registerConfirmPasswordField.getText().toString();
+                String userType = "";
+                for (MaterialCardView card : registerTypeSelections)
+                {
+                    if (card.isChecked())
+                    {
+                        userType = getView().findViewById(card.getId()).getTag().toString();
+                        break;
+                    }
+                }
+                try {
+                    if (mAuthViewModel.initRegisterProcess(email, password, confirmPassword, userType, getString(R.string.Authentication_Card_Driver)))
+                    {
+                        Snackbar.make(getView(), "Account successfully created.", Snackbar.LENGTH_SHORT).show();
+                        registerEmailField.setText("");
+                        registerPasswordField.setText("");
+                        registerConfirmPasswordField.setText("");
+                    }
+                    else
+                    {
+                        Snackbar.make(getView(), "Something went wrong. Please recheck your inputs.", Snackbar.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                } finally {
+                    progressBar.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     private void setupTextListeners()
@@ -62,7 +110,7 @@ public class UserRegister extends AuthFragment {
         });
     }
 
-    private void setupRegisterCardListeners(int[] cv)
+    private void setupRegisterCardListenersEnMasse(int[] cv)
     {
         for (int card_id : cv)
         {

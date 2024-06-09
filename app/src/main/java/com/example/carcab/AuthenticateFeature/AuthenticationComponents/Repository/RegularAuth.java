@@ -33,7 +33,7 @@ public class RegularAuth implements IAuthenticate {
                                 vehicleType: String
                             }
                              */
-                                Map<String, String> details = new HashMap<>();
+                                Map<java.lang.String, java.lang.String> details = new HashMap<>();
                                 try {
                                     details.put("email", info.getEmail());
                                     details.put("vehicleType", info.getVehicle().getVehicleType());
@@ -61,7 +61,7 @@ public class RegularAuth implements IAuthenticate {
                                 email: String
                             }
                              */
-                                Map<String, String> details = new HashMap<>();
+                                Map<java.lang.String, java.lang.String> details = new HashMap<>();
                                 details.put("email", info.getEmail());
                                 FirebaseConnector.getInstance()
                                         .getFirebaseDatabaseInstance()
@@ -84,15 +84,6 @@ public class RegularAuth implements IAuthenticate {
         boolean loginResult = FirebaseConnector.getInstance()
                 .getFirebaseAuthInstance()
                 .signInWithEmailAndPassword(info.getEmail(), info.getPassword())
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (info.isDriver())
-                        {
-
-                        }
-                    }
-                })
                 .isSuccessful();
         return loginResult;
     }

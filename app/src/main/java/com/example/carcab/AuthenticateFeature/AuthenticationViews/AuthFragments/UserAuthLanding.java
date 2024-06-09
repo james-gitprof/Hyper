@@ -4,12 +4,14 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.carcab.AuthenticateFeature.AuthenticationComponents.ViewModels.AuthenticationViewModel;
 import com.example.carcab.AuthenticateFeature.AuthenticationViews.Abstractions.AuthFragment;
 import com.example.carcab.R;
 
@@ -25,7 +27,7 @@ public class UserAuthLanding extends AuthFragment {
                              Bundle savedInstanceState) {
 
 
-
+        mAuthViewModel = new ViewModelProvider(this).get(AuthenticationViewModel.class);
         return inflater.inflate(R.layout.fragment_user_auth_landing, container, false);
     }
 

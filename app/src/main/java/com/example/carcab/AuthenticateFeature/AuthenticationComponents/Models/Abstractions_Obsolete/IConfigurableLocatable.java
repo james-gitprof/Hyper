@@ -1,4 +1,4 @@
-package com.example.carcab.AuthenticateFeature.AuthenticationComponents.Models.Abstractions;
+package com.example.carcab.AuthenticateFeature.AuthenticationComponents.Models.Abstractions_Obsolete;
 
 public interface IConfigurableLocatable extends ILocatable
 {

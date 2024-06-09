@@ -1,17 +1,24 @@
 package com.example.carcab.AuthenticateFeature.AuthenticationComponents.Models;
 
-import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Models.Abstractions.IDrivable;
+import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Models.Abstractions_Obsolete.IDrivable;
 
 public class UserInfo {
 
     private boolean isDriver;
     private IDrivable vehicle;
-    private String email, password;
-    public UserInfo(String email, String password, boolean isDriver)
+    private java.lang.String email, password;
+    public UserInfo(java.lang.String email, java.lang.String password, boolean isDriver)
     {
         this.email = email;
         this.password = password;
         this.isDriver = isDriver;
+    }
+
+    public UserInfo(java.lang.String email, java.lang.String password)
+    {
+        this.email = email;
+        this.password = password;
+        this.isDriver = false;
     }
 
     public void setVehicle(IDrivable vehicle) throws Exception {
@@ -39,19 +46,19 @@ public class UserInfo {
         isDriver = driver;
     }
 
-    public String getEmail() {
+    public java.lang.String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(java.lang.String email) {
         this.email = email;
     }
 
-    public String getPassword() {
+    public java.lang.String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(java.lang.String password) {
         this.password = password;
     }
 }

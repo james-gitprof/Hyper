@@ -2,6 +2,8 @@ package com.example.carcab.AuthenticateFeature.AuthenticationViews.Abstractions;
 
 import android.util.Log;
 
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.ViewModels.AuthenticationViewModel;
 
 public abstract class AuthFragment extends SwitchableFragment {
@@ -10,13 +12,8 @@ public abstract class AuthFragment extends SwitchableFragment {
 
     public AuthFragment()
     {
-        Log.d("AUTH_FRAGMENT", "View Model initialized;");
-        mAuthViewModel = AuthenticationViewModel.getInstance();
+        Log.d("AUTH_FRAGMENT", "View Model initialized. From class " + this.getClass().toString());
     }
 
-    public AuthenticationViewModel getResponsibleViewModel()
-    {
-        return this.mAuthViewModel;
-    }
 
 }

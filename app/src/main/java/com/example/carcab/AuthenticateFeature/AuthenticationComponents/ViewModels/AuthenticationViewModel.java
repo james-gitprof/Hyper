@@ -4,32 +4,35 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Models.Abstractions_Obsolete.IDrivable;
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Models.UserInfo;
+import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Repository.DatabaseDriverFinder;
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Repository.FirebaseConnector;
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Repository.IAuthenticate;
+import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Repository.IDataFinder;
+import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Repository.RegularAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class AuthenticationViewModel extends ViewModel {
+
     /*
-    WTF IS THIS?
+    !! THIS CLASS MUST NOT HOLD ANY REFERENCE TO ANY ACTIVITY OR SIMILAR CONTEXT !!
+    !! DOING SO MAY CAUSE MEMORY LEAKS !!
+
+    OK, so wtf is this?
 
     Read here, boah.
     https://developer.android.com/topic/libraries/architecture/viewmodel
-     */
 
-    /*
-    WARNING: NOT THREAD-SAFE!!
-    Modify this singleton class when working with threads if its needed
-    I don't think its gonna be needed for this case but you never know...
+    Business logic goes in this class.
+    For authentication-related stuff only.
      */
     private static AuthenticationViewModel mSelfAuthVM;
-    private static FirebaseConnector mFirebase;
     private final MutableLiveData<FirebaseUser> userInSession = new MutableLiveData<>();
+    private final MutableLiveData<UserInfo> userMetadata = new MutableLiveData<>();
     private IAuthenticate authenticator;
     private AuthenticationViewModel()
     {
-        // When initialized, provide connection to firebase repository through connector
-        mFirebase = FirebaseConnector.getInstance();
 
     }
 
@@ -38,22 +41,45 @@ public class AuthenticationViewModel extends ViewModel {
         if (mSelfAuthVM == null)
         {
             mSelfAuthVM = new AuthenticationViewModel();
+            mSelfAuthVM.setAuthenticator(new RegularAuth());
         }
         return mSelfAuthVM;
     }
 
-    private boolean initLoginProcess()
+    public boolean initLoginProcess(String email, String password)
     {
-        return false;
+        UserInfo userData = new UserInfo(email, password);
+        boolean loginResult = !(email.isBlank() || password.isBlank()) ? getAuthenticator().performLogin(userData) : false;
+        if (loginResult == true)
+        {
+            FirebaseUser loggedUser = FirebaseConnector
+                    .getInstance()
+                    .getFirebaseAuthInstance()
+                    .getCurrentUser();
+            String userUID = loggedUser.getUid();
+            // check which user group this one belongs to...
+            IDataFinder<String> finder = new DatabaseDriverFinder();
+            boolean findDriver = finder.isAvailable(userUID);
+            userData.setDriver(findDriver);
+            userMetadata.setValue(userData);
+        }
+        return loginResult;
     }
 
-    private boolean initRegisterProcess(String email, String password, String password_2, String userType, String comparableConstant)
-    {
-        // validate data
-        if (password.hashCode() == password_2.hashCode())
+    public boolean initRegisterProcess(String email, String password, String password_2, String userType, String comparableConstant) throws Exception {
+        if (password.hashCode() == password_2.hashCode() && !(password.isBlank() || password_2.isBlank() || userType.isBlank() ||comparableConstant.isBlank()))
         {
             boolean isDriver = userType.equalsIgnoreCase(comparableConstant) ? true : false;
             UserInfo user = new UserInfo(email, password, isDriver);
+            if (isDriver) {
+                user.setVehicle(new IDrivable() {
+                    @Override
+                    public String getVehicleType() {
+                        return "Not configured";
+                    }
+                });
+            }
+            userMetadata.setValue(user);
             if (getAuthenticator().performRegister(user))
             {
                 userInSession.setValue(FirebaseConnector.getInstance().getFirebaseAuthInstance().getCurrentUser());
@@ -73,9 +99,14 @@ public class AuthenticationViewModel extends ViewModel {
         return this.authenticator;
     }
 
-    public LiveData<FirebaseUser> getUserInSession() // use observer to get state at any time
+    public LiveData<FirebaseUser> getUserInSession() // use observe() to get state at any time
     {
         return userInSession;
+    }
+
+    public LiveData<UserInfo> getUserMetadata()
+    {
+        return userMetadata;
     }
 
 }
