@@ -14,7 +14,7 @@ public class RegularAuth implements IAuthenticate {
 
     @Override
     public boolean performRegister(UserInfo info) {
-        boolean loginResult = FirebaseConnector.getInstance()
+        boolean registerResult = FirebaseConnector.getInstance()
                 .getFirebaseAuthInstance()
                 .createUserWithEmailAndPassword(info.getEmail(), info.getPassword())
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -76,14 +76,31 @@ public class RegularAuth implements IAuthenticate {
                         }
                     }
                 }).isSuccessful();
-        return loginResult;
+        return registerResult;
     }
 
     @Override
     public boolean performLogin(UserInfo info) {
         boolean loginResult = FirebaseConnector.getInstance()
                 .getFirebaseAuthInstance()
-                .signInWithEmailAndPassword(info.getEmail(), info.getPassword()).isSuccessful();
+                .signInWithEmailAndPassword(info.getEmail(), info.getPassword())
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (info.isDriver())
+                        {
+
+                        }
+                    }
+                })
+                .isSuccessful();
         return loginResult;
+    }
+
+    @Override
+    public void performSignOut() {
+        FirebaseConnector.getInstance()
+                .getFirebaseAuthInstance()
+                .signOut();
     }
 }

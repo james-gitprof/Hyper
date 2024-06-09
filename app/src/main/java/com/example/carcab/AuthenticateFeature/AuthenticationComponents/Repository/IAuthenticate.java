@@ -5,5 +5,5 @@ import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Models.Us
 public interface IAuthenticate {
     public boolean performRegister(UserInfo info);
     public boolean performLogin(UserInfo info);
-
+    public void performSignOut();
 }
