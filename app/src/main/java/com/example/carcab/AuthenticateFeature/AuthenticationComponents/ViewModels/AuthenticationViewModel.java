@@ -1,9 +1,5 @@
 package com.example.carcab.AuthenticateFeature.AuthenticationComponents.ViewModels;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
-
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Models.Abstractions_Obsolete.IDrivable;
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Models.UserInfo;
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Repository.DatabaseDriverFinder;
@@ -34,7 +30,7 @@ public class AuthenticationViewModel {
         return mSelfAuthVM;
     }
 
-    public boolean initLoginProcess(String email, String password)
+    public void initLoginProcess(String email, String password)
     {
         UserInfo userData = new UserInfo(email, password);
         boolean loginResult = !(email.isBlank() || password.isBlank()) ? getAuthenticator().performLogin(userData) : false;
@@ -51,10 +47,11 @@ public class AuthenticationViewModel {
             userData.setDriver(findDriver);
             userMetadata = userData;
         }
-        return loginResult;
+
+
     }
 
-    public boolean initRegisterProcess(String email, String password, String password_2, String userType, String comparableConstant) throws Exception {
+    public void initRegisterProcess(String email, String password, String password_2, String userType, String comparableConstant) throws Exception {
         if (password.hashCode() == password_2.hashCode() && !(password.isBlank() || password_2.isBlank() || userType.isBlank() ||comparableConstant.isBlank()))
         {
             boolean isDriver = userType.equalsIgnoreCase(comparableConstant) ? true : false;
@@ -72,10 +69,27 @@ public class AuthenticationViewModel {
             if (status)
             {
                 userInSession = FirebaseConnector.getInstance().getFirebaseAuthInstance().getCurrentUser();
-                return true;
             }
         }
-        return false;
+        else
+        {
+            raiseMyErrorState(new Exception("Invalid fields. Double-check your inputs."));
+        }
+    }
+
+    public void raiseRegistrationSuccess(FirebaseUser user)
+    {
+        AuthStrictViewModel.getInstance().updateLocalUserSessionState(user);
+    }
+
+    public void raiseMyErrorState(Exception e)
+    {
+        AuthStrictViewModel.getInstance().updateMyExceptionState(e);
+    }
+
+    public void raiseAuthenticationException(Exception e)
+    {
+        AuthStrictViewModel.getInstance().updateExceptionState(e);
     }
 
     private void setAuthenticator(IAuthenticate auth)

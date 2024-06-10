@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.carcab.AuthenticateFeature.AuthenticationComponents.ViewModels.AuthStrictViewModel;
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.ViewModels.AuthenticationViewModel;
 import com.example.carcab.AuthenticateFeature.AuthenticationViews.Abstractions.AuthFragment;
 import com.example.carcab.R;
@@ -27,6 +29,9 @@ import java.util.List;
 public class UserRegister extends AuthFragment {
 
     private List<MaterialCardView> registerTypeSelections;
+    EditText registerEmailField;
+    EditText registerPasswordField;
+    EditText registerConfirmPasswordField;
     public UserRegister() {
         // Required empty public constructor
         registerTypeSelections = new ArrayList<>();
@@ -47,20 +52,72 @@ public class UserRegister extends AuthFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        AuthStrictViewModel model = new ViewModelProvider(this).get(AuthStrictViewModel.class);
         SetupBackPressedExit();
         int[] cardViewIds = {R.id.driver_card, R.id.customer_card};
+        registerEmailField = ((TextInputLayout) getView().findViewById(R.id.register_email_field)).getEditText();
+        registerPasswordField = ((TextInputLayout) getView().findViewById(R.id.register_password_field)).getEditText();
+        registerConfirmPasswordField = ((TextInputLayout) getView().findViewById(R.id.register_confirmpassword_field)).getEditText();
 
         setupTextListeners();
         setupRegisterCardListenersEnMasse(cardViewIds);
         setupButtonListeners();
+
+        model.getExceptionState().observe(getViewLifecycleOwner(), e -> {
+            Snackbar.make(getView(), e.getMessage(), Snackbar.LENGTH_INDEFINITE)
+                    .setAction(R.string.Acknowldgement_Action, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            // automatically closes the thing
+                        }
+                    })
+                    .show();
+        });
+
+        model.getDevExceptionState().observe(getViewLifecycleOwner(), e -> {
+            Snackbar.make(getView(), e.getMessage(), Snackbar.LENGTH_INDEFINITE)
+                    .setAction(R.string.Acknowldgement_Action, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            // automatically closes the thing
+                        }
+                    })
+                    .show();
+        });
+
+        model.getLocalUserSessionState().observe(getViewLifecycleOwner(), e -> {
+            if (e == null)
+            {
+                Snackbar.make(getView(), "Please login again to authenticate.", Snackbar.LENGTH_INDEFINITE)
+                        .setAction(R.string.Acknowldgement_Action, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                // automatically closes the thing
+                            }
+                        })
+                        .show();
+            }
+            else
+            {
+                Snackbar.make(getView(), "Account successfully registered.", Snackbar.LENGTH_INDEFINITE)
+                        .setAction(R.string.Acknowldgement_Action, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                // automatically closes the thing
+                            }
+                        })
+                        .show();
+            }
+            registerConfirmPasswordField.setText("");
+            registerEmailField.setText("");
+            registerPasswordField.setText("");
+
+        });
     }
 
     private void setupButtonListeners()
     {
         Button registerBtn = getView().findViewById(R.id.registerbtn);
-        EditText registerEmailField = ((TextInputLayout) getView().findViewById(R.id.register_email_field)).getEditText();
-        EditText registerPasswordField = ((TextInputLayout) getView().findViewById(R.id.register_password_field)).getEditText();
-        EditText registerConfirmPasswordField = ((TextInputLayout) getView().findViewById(R.id.register_confirmpassword_field)).getEditText();
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,34 +126,30 @@ public class UserRegister extends AuthFragment {
                 String email = registerEmailField.getText().toString();
                 String password = registerPasswordField.getText().toString();
                 String confirmPassword = registerConfirmPasswordField.getText().toString();
-                String userType = "";
-                for (MaterialCardView card : registerTypeSelections)
-                {
-                    if (card.isChecked())
-                    {
-                        userType = getView().findViewById(card.getId()).getTag().toString();
-                        break;
-                    }
-                }
+                String userType = getChosenUserType();
+
                 try {
-                    if (mAuthViewModel.initRegisterProcess(email, password, confirmPassword, userType, getString(R.string.Authentication_Card_Driver)))
-                    {
-                        Snackbar.make(getView(), "Account successfully created.", Snackbar.LENGTH_SHORT).show();
-                        registerEmailField.setText("");
-                        registerPasswordField.setText("");
-                        registerConfirmPasswordField.setText("");
-                    }
-                    else
-                    {
-                        Snackbar.make(getView(), "Something went wrong. Please recheck your inputs.", Snackbar.LENGTH_SHORT).show();
-                    }
+                    mAuthViewModel.initRegisterProcess(email, password, confirmPassword, userType, getString(R.string.Authentication_Card_Driver));
                 } catch (Exception e) {
                     throw new RuntimeException(e);
-                } finally {
-                    progressBar.setVisibility(View.GONE);
                 }
+                progressBar.setVisibility(View.GONE);
             }
         });
+    }
+
+    public String getChosenUserType()
+    {
+
+        for (MaterialCardView card : registerTypeSelections)
+        {
+            if (card.isChecked())
+            {
+                String userType = getView().findViewById(card.getId()).getTag().toString();
+                return userType;
+            }
+        }
+        return "";
     }
 
     private void setupTextListeners()

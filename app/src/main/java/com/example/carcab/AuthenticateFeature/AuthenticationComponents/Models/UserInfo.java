@@ -12,6 +12,12 @@ public class UserInfo {
         this.email = email;
         this.password = password;
         this.isDriver = isDriver;
+        this.vehicle = new IDrivable() {
+            @Override
+            public String getVehicleType() {
+                return "Not configured";
+            }
+        };
     }
 
     public UserInfo(java.lang.String email, java.lang.String password)
@@ -19,6 +25,12 @@ public class UserInfo {
         this.email = email;
         this.password = password;
         this.isDriver = false;
+        this.vehicle = new IDrivable() {
+            @Override
+            public String getVehicleType() {
+                return "N/A";
+            }
+        };
     }
 
     public void setVehicle(IDrivable vehicle) throws Exception {

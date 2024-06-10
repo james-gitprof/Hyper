@@ -3,9 +3,12 @@ package com.example.carcab.AuthenticateFeature.AuthenticationComponents.Reposito
 import androidx.annotation.NonNull;
 
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Models.UserInfo;
+import com.example.carcab.AuthenticateFeature.AuthenticationComponents.ViewModels.AuthenticationViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -73,6 +76,27 @@ public class RegularAuth implements IAuthenticate {
                                                 .getUid())
                                         .setValue(details);
                             }
+                            // Afterwards, clear the cache in case
+                            // We will prompt them to login again.
+                            AuthenticationViewModel.getInstance().raiseRegistrationSuccess(
+                                    FirebaseConnector.getInstance()
+                                            .getFirebaseAuthInstance()
+                                            .getCurrentUser()
+                            );
+                            performSignOut();
+                            AuthenticationViewModel.getInstance().raiseRegistrationSuccess(FirebaseConnector.getInstance()
+                                    .getFirebaseAuthInstance()
+                                    .getCurrentUser());
+                        }
+                        else
+                        {
+                            AuthenticationViewModel.getInstance().raiseAuthenticationException(task.getException());
+                            // delete the user because it creates a new entry despite failure
+                            // might look into it once polishing starts but for now, this is just a
+                            // band-aid fix.
+
+                            // implementation coming soon
+
                         }
                     }
                 })
@@ -85,6 +109,13 @@ public class RegularAuth implements IAuthenticate {
         boolean loginResult = FirebaseConnector.getInstance()
                 .getFirebaseAuthInstance()
                 .signInWithEmailAndPassword(info.getEmail(), info.getPassword())
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        AuthenticationViewModel.getInstance()
+                                .raiseAuthenticationException(e);
+                    }
+                })
                 .isSuccessful();
         return loginResult;
     }
