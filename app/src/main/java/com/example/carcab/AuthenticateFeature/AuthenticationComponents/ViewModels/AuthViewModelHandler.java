@@ -1,19 +1,28 @@
 package com.example.carcab.AuthenticateFeature.AuthenticationComponents.ViewModels;
 
-import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Models.Abstractions_Obsolete.IDrivable;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Models.Abstractions.IDrivable;
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Models.UserInfo;
-import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Repository.DatabaseDriverFinder;
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Repository.FirebaseConnector;
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Repository.IAuthenticate;
-import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Repository.IDataFinder;
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Repository.RegularAuth;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 public class AuthViewModelHandler {
 
+    // Helper class for AuthStrictViewModel.class
+
     private static AuthViewModelHandler mSelfAuthVM;
-    FirebaseUser userInSession;
-    UserInfo userMetadata;
+    private FirebaseUser userInSession;
+    private UserInfo userMetadata;
     private IAuthenticate authenticator;
     private AuthViewModelHandler()
     {
@@ -32,20 +41,16 @@ public class AuthViewModelHandler {
 
     public void initLoginProcess(String email, String password)
     {
-        UserInfo userData = new UserInfo(email, password);
-        boolean loginResult = !(email.isBlank() || password.isBlank()) ? getAuthenticator().performLogin(userData) : false;
-        if (loginResult == true)
+        // Clear the thing first just in case...
+        UserInfo userData = userMetadata != null ? null : new UserInfo(email, password);
+        boolean validationResult = !(email.isBlank() || password.isBlank()) ? true : false;
+        if (validationResult == true)
         {
-            FirebaseUser loggedUser = FirebaseConnector
-                    .getInstance()
-                    .getFirebaseAuthInstance()
-                    .getCurrentUser();
-            String userUID = loggedUser.getUid();
-            // check which user group this one belongs to...
-            IDataFinder<String> finder = new DatabaseDriverFinder();
-            boolean findDriver = finder.isAvailable(userUID);
-            userData.setDriver(findDriver);
-            userMetadata = userData;
+            getAuthenticator().performLogin(userData);
+        }
+        else
+        {
+            raiseMyErrorState(new Exception("Invalid or missing fields. Please check your inputs and try again."));
         }
     }
 
@@ -77,7 +82,7 @@ public class AuthViewModelHandler {
 
     public void raiseRegistrationSuccess(FirebaseUser user)
     {
-        AuthStrictViewModel.getInstance().updateLocalUserSessionState(user);
+        AuthStrictViewModel.getInstance().updateUserSessionState(user);
     }
 
     public void raiseMyErrorState(Exception e)

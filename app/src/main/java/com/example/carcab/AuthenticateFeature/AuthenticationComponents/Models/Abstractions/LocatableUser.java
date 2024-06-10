@@ -1,4 +1,4 @@
-package com.example.carcab.AuthenticateFeature.AuthenticationComponents.Models.Abstractions_Obsolete;
+package com.example.carcab.AuthenticateFeature.AuthenticationComponents.Models.Abstractions;
 
 public abstract class LocatableUser extends User implements IConfigurableLocatable {
     protected ILocatable userLocation;

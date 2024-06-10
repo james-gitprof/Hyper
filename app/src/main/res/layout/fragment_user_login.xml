@@ -97,65 +97,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="12dp"
-                android:gravity="center">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="128dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="12dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="64dp"
-                            android:scaleType="center"
-                            android:src="@drawable/person_24px"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/Authentication_Card_Person" />
-
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="128dp"
-                    android:layout_height="wrap_content">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="64dp"
-                            android:scaleType="center"
-                            android:src="@drawable/driver_24px"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/Authentication_Card_Driver" />
-
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-            </LinearLayout>
 
             <Button
                 style="@style/Widget.Material3.Button.Icon"
@@ -166,13 +108,23 @@
                 android:id="@+id/login_button"
                 android:text="@string/Fragment_Authentication_Login"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="Tap to register"
-                android:id="@+id/register_text_clickable"
-                android:textColor="@color/linkTextType"/>
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:gravity="center_horizontal">
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="12dp"
+                   android:text="Tap to register"
+                   android:id="@+id/register_text_clickable"
+                   android:textColor="@color/linkTextType"/>
+
+               <!--
+                Forgot password? Maybe later
+                -->
+           </LinearLayout>
         </LinearLayout>
 
     </RelativeLayout>

@@ -1,6 +1,6 @@
 package com.example.carcab.AuthenticateFeature.AuthenticationComponents.Models;
 
-import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Models.Abstractions_Obsolete.IDrivable;
+import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Models.Abstractions.IDrivable;
 
 public class UserInfo {
 

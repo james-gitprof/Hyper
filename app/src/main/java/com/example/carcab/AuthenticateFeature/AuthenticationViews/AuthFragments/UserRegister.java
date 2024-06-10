@@ -56,10 +56,7 @@ public class UserRegister extends AuthFragment {
         AuthStrictViewModel model = new ViewModelProvider(this).get(AuthStrictViewModel.class);
         SetupBackPressedExit();
         int[] cardViewIds = {R.id.driver_card, R.id.customer_card};
-        registerEmailField = ((TextInputLayout) getView().findViewById(R.id.register_email_field)).getEditText();
-        registerPasswordField = ((TextInputLayout) getView().findViewById(R.id.register_password_field)).getEditText();
-        registerConfirmPasswordField = ((TextInputLayout) getView().findViewById(R.id.register_confirmpassword_field)).getEditText();
-        progressBar = getView().findViewById(R.id.register_progress);
+        initializeUIElements();
 
         setupTextListeners();
         setupRegisterCardListenersEnMasse(cardViewIds);
@@ -89,8 +86,9 @@ public class UserRegister extends AuthFragment {
                     .show();
         });
 
-        model.getLocalUserSessionState().observe(getViewLifecycleOwner(), e -> {
+        model.getUserSessionState().observe(getViewLifecycleOwner(), e -> {
             progressBar.setVisibility(View.GONE);
+            clearUIFields();
             Snackbar.make(getView(), "Account successfully registered. Proceed to login to continue.", Snackbar.LENGTH_INDEFINITE)
                     .setAction(R.string.Acknowledgement_Action, new View.OnClickListener() {
                         @Override
@@ -101,6 +99,21 @@ public class UserRegister extends AuthFragment {
                     .show();
 
         });
+    }
+
+    private void initializeUIElements()
+    {
+        registerEmailField = ((TextInputLayout) getView().findViewById(R.id.register_email_field)).getEditText();
+        registerPasswordField = ((TextInputLayout) getView().findViewById(R.id.register_password_field)).getEditText();
+        registerConfirmPasswordField = ((TextInputLayout) getView().findViewById(R.id.register_confirmpassword_field)).getEditText();
+        progressBar = getView().findViewById(R.id.register_progress);
+    }
+
+    private void clearUIFields()
+    {
+        registerEmailField.setText("");
+        registerPasswordField.setText("");
+        registerConfirmPasswordField.setText("");
     }
 
     private void setupButtonListeners()

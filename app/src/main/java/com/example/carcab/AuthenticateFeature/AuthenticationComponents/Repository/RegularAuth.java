@@ -1,13 +1,22 @@
 package com.example.carcab.AuthenticateFeature.AuthenticationComponents.Repository;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Models.UserInfo;
+import com.example.carcab.AuthenticateFeature.AuthenticationComponents.ViewModels.AuthStrictViewModel;
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.ViewModels.AuthViewModelHandler;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -102,19 +111,69 @@ public class RegularAuth implements IAuthenticate {
     }
 
     @Override
-    public boolean performLogin(UserInfo info) {
-        boolean loginResult = FirebaseConnector.getInstance()
+    public void performLogin(UserInfo info) {
+         FirebaseConnector.getInstance()
                 .getFirebaseAuthInstance()
                 .signInWithEmailAndPassword(info.getEmail(), info.getPassword())
-                .addOnFailureListener(new OnFailureListener() {
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
-                    public void onFailure(@NonNull Exception e) {
-                        AuthViewModelHandler.getInstance()
-                                .raiseAuthenticationException(e);
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful() == false)
+                        {
+                            AuthViewModelHandler.getInstance().raiseAuthenticationException(task.getException());
+                        }
+                        else
+                        {
+                            Log.d("AUTH-LOGIN-PERFORMER", "Authentication success!");
+                            FirebaseConnector.getInstance().getFirebaseAuthInstance().addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+                                @Override
+                                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                                    FirebaseUser loggedUser = firebaseAuth
+                                            .getCurrentUser();
+                                    if (loggedUser != null)
+                                    {
+                                        String userUID = loggedUser.getUid();
+                                        // check which user group this one belongs to...
+                                        DatabaseReference driverGroupRef = FirebaseConnector.getInstance()
+                                                .getFirebaseDatabaseInstance()
+                                                .child("Users")
+                                                .child("Drivers");
+                                        UserInfo userMetadataModified = info;
+                                        driverGroupRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                if (snapshot.exists())
+                                                {
+                                                    for (DataSnapshot subSnapShot : snapshot.getChildren())
+                                                    {
+                                                        if (subSnapShot.getKey().equals(userUID))
+                                                        {
+                                                            Log.d("AUTH-DRIVER-FINDER-STATUS", "Found a driver based on entered credentials!");
+
+                                                            userMetadataModified.setDriver(true);
+                                                            break;
+                                                        }
+                                                    }
+
+                                                    AuthStrictViewModel.getInstance().updateLocalUserSessionState(userMetadataModified);
+                                                }
+                                            }
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+                                                // idk what to do with this one yet...
+                                            }
+                                        });
+
+                                    }
+                                    else
+                                    {
+                                        AuthViewModelHandler.getInstance().raiseMyErrorState(new Exception("Something went wrong authenticating the user to the server."));
+                                    }
+                                }
+                            });
+                        }
                     }
-                })
-                .isSuccessful();
-        return loginResult;
+                });
     }
 
     @Override
