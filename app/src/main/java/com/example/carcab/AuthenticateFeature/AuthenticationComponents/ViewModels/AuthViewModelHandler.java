@@ -9,22 +9,22 @@ import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Repositor
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Repository.RegularAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class AuthenticationViewModel {
+public class AuthViewModelHandler {
 
-    private static AuthenticationViewModel mSelfAuthVM;
+    private static AuthViewModelHandler mSelfAuthVM;
     FirebaseUser userInSession;
     UserInfo userMetadata;
     private IAuthenticate authenticator;
-    private AuthenticationViewModel()
+    private AuthViewModelHandler()
     {
 
     }
 
-    public static AuthenticationViewModel getInstance()
+    public static AuthViewModelHandler getInstance()
     {
         if (mSelfAuthVM == null)
         {
-            mSelfAuthVM = new AuthenticationViewModel();
+            mSelfAuthVM = new AuthViewModelHandler();
             mSelfAuthVM.setAuthenticator(new RegularAuth());
         }
         return mSelfAuthVM;
@@ -47,8 +47,6 @@ public class AuthenticationViewModel {
             userData.setDriver(findDriver);
             userMetadata = userData;
         }
-
-
     }
 
     public void initRegisterProcess(String email, String password, String password_2, String userType, String comparableConstant) throws Exception {

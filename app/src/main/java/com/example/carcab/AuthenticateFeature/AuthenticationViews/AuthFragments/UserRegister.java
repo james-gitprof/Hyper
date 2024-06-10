@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.ViewModels.AuthStrictViewModel;
-import com.example.carcab.AuthenticateFeature.AuthenticationComponents.ViewModels.AuthenticationViewModel;
 import com.example.carcab.AuthenticateFeature.AuthenticationViews.Abstractions.AuthFragment;
 import com.example.carcab.R;
 import com.google.android.material.card.MaterialCardView;
@@ -32,6 +31,8 @@ public class UserRegister extends AuthFragment {
     EditText registerEmailField;
     EditText registerPasswordField;
     EditText registerConfirmPasswordField;
+
+    LinearProgressIndicator progressBar;
     public UserRegister() {
         // Required empty public constructor
         registerTypeSelections = new ArrayList<>();
@@ -58,14 +59,16 @@ public class UserRegister extends AuthFragment {
         registerEmailField = ((TextInputLayout) getView().findViewById(R.id.register_email_field)).getEditText();
         registerPasswordField = ((TextInputLayout) getView().findViewById(R.id.register_password_field)).getEditText();
         registerConfirmPasswordField = ((TextInputLayout) getView().findViewById(R.id.register_confirmpassword_field)).getEditText();
+        progressBar = getView().findViewById(R.id.register_progress);
 
         setupTextListeners();
         setupRegisterCardListenersEnMasse(cardViewIds);
         setupButtonListeners();
 
         model.getExceptionState().observe(getViewLifecycleOwner(), e -> {
+            progressBar.setVisibility(View.GONE);
             Snackbar.make(getView(), e.getMessage(), Snackbar.LENGTH_INDEFINITE)
-                    .setAction(R.string.Acknowldgement_Action, new View.OnClickListener() {
+                    .setAction(R.string.Acknowledgement_Action, new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             // automatically closes the thing
@@ -75,8 +78,9 @@ public class UserRegister extends AuthFragment {
         });
 
         model.getDevExceptionState().observe(getViewLifecycleOwner(), e -> {
+            progressBar.setVisibility(View.GONE);
             Snackbar.make(getView(), e.getMessage(), Snackbar.LENGTH_INDEFINITE)
-                    .setAction(R.string.Acknowldgement_Action, new View.OnClickListener() {
+                    .setAction(R.string.Acknowledgement_Action, new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             // automatically closes the thing
@@ -86,31 +90,15 @@ public class UserRegister extends AuthFragment {
         });
 
         model.getLocalUserSessionState().observe(getViewLifecycleOwner(), e -> {
-            if (e == null)
-            {
-                Snackbar.make(getView(), "Please login again to authenticate.", Snackbar.LENGTH_INDEFINITE)
-                        .setAction(R.string.Acknowldgement_Action, new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                // automatically closes the thing
-                            }
-                        })
-                        .show();
-            }
-            else
-            {
-                Snackbar.make(getView(), "Account successfully registered.", Snackbar.LENGTH_INDEFINITE)
-                        .setAction(R.string.Acknowldgement_Action, new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                // automatically closes the thing
-                            }
-                        })
-                        .show();
-            }
-            registerConfirmPasswordField.setText("");
-            registerEmailField.setText("");
-            registerPasswordField.setText("");
+            progressBar.setVisibility(View.GONE);
+            Snackbar.make(getView(), "Account successfully registered. Proceed to login to continue.", Snackbar.LENGTH_INDEFINITE)
+                    .setAction(R.string.Acknowledgement_Action, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            // automatically closes the thing
+                        }
+                    })
+                    .show();
 
         });
     }
@@ -121,7 +109,7 @@ public class UserRegister extends AuthFragment {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LinearProgressIndicator progressBar = getView().findViewById(R.id.register_progress);
+
                 progressBar.setVisibility(View.VISIBLE);
                 String email = registerEmailField.getText().toString();
                 String password = registerPasswordField.getText().toString();
@@ -133,7 +121,6 @@ public class UserRegister extends AuthFragment {
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
-                progressBar.setVisibility(View.GONE);
             }
         });
     }
