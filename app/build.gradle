@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        mavenCentral()
         google()
     }
 }
@@ -56,6 +57,7 @@ android {
 
 dependencies {
     implementation libs.firebase.database
+    implementation 'org.osmdroid:osmdroid-android:6.1.18'
     def LIFECYCLE_VERSION = "2.8.1"
     def FRAGMENT_VERSION = "1.7.1"
 
