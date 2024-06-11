@@ -5,7 +5,7 @@
 // for testing before applying to other branches
 // remember to omit this and change it with something else once ready for actual use
 
-const config = {
+const config = {:
     //branches: [ADDENDUM_DISTRIBUTION_BRANCH,{name: TESTING_DISTRIBUTION_BRANCH, prerelease: true}]
     branches: [{name: "integrator-testing", prerelease: true}],
     plugins: [
