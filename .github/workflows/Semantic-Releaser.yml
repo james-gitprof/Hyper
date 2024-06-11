@@ -1,0 +1,40 @@
+# by @elysian-dawnbreaker
+# Automates making of release builds to github
+
+name: APK Build Releaser
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  Builder:
+      name: Initiate builder workflow
+      uses: ./.github/workflows/ReusableProjectAssembly.yml
+
+  Releaser:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    needs: Builder
+    steps:
+      - name: Branch checkout
+        uses: actions/checkout@v4.1.5
+
+      - name: Setup Node.js v20
+        uses: actions/setup-node@v4.0.2
+        with:
+          node-version: 20
+
+      - run: npm ci
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4.1.7
+        with:
+          name: Hyper.apk
+          github-token: ${{ secrets.github_token }}
+

@@ -1,12 +1,12 @@
 package com.example.carcab.AuthenticateFeature.AuthenticationComponents.Repository;
 
+import com.example.carcab.BuildConfig;
 import com.example.carcab.Secrets.Vault;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class FirebaseConnector {
-
     /*
     WARNING: NOT THREAD-SAFE!!
      */
@@ -17,7 +17,7 @@ public class FirebaseConnector {
     private FirebaseConnector()
     {
         this.mAuth = FirebaseAuth.getInstance();
-        this.mDatabase = FirebaseDatabase.getInstance(Vault.DATABASE_REFERENCE_URL).getReference();
+        this.mDatabase = FirebaseDatabase.getInstance(BuildConfig.API_KEY).getReference();
     }
 
     public static FirebaseConnector getInstance()
@@ -38,10 +38,5 @@ public class FirebaseConnector {
     {
         return this.mDatabase;
     }
-
-
-
-
-
 
 }

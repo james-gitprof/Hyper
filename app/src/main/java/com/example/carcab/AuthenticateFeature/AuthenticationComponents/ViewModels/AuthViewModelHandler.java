@@ -41,8 +41,7 @@ public class AuthViewModelHandler {
 
     public void initLoginProcess(String email, String password)
     {
-        // Clear the thing first just in case...
-        UserInfo userData = userMetadata != null ? null : new UserInfo(email, password);
+        UserInfo userData = new UserInfo(email, password);
         boolean validationResult = !(email.isBlank() || password.isBlank()) ? true : false;
         if (validationResult == true)
         {
