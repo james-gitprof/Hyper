@@ -4,10 +4,10 @@
 
     Use App_Name instead
     -->
-    
+
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_main2">MainActivity2</string>
-  
+
     <string name="App_Name">CarCab</string>
     <string name="Fragment_Authentication_Login">Login</string>
     <string name="Fragment_Authentication_Login_Header">User Login</string>
@@ -23,4 +23,8 @@
     <string name="Authentication_Card_Driver">Driver</string>
 
     <string name="Authentication_Greeter">Welcome!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="Acknowledgement_Action">Dismiss</string>
 </resources>

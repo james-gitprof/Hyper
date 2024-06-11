@@ -24,15 +24,10 @@
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.HyperAppDev" />
         <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:label="@string/title_activity_home"
-            android:theme="@style/Theme.HyperAppDev" />
-        <activity
-            android:name="com.example.carcab.LibAuthentication.AuthActivities.Authentication"
+            android:name="com.example.carcab.AuthenticateFeature.AuthenticationViews.AuthActivities.Authentication"
             android:exported="false" />
         <activity
-            android:name="com.example.carcab.LibAuthentication.AuthActivities.MainActivity"
+            android:name="com.example.carcab.AuthenticateFeature.AuthenticationViews.AuthActivities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

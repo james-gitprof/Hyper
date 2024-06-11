@@ -1,20 +1,19 @@
-package com.example.carcab.CompAuthentication.Models.Abstractions;
-
-import com.example.carcab.CompAuthentication.Models.Location;
+package com.example.carcab.AuthenticateFeature.AuthenticationComponents.Models.Abstractions;
 
 public abstract class LocatableUser extends User implements IConfigurableLocatable {
-    protected Location userLocation;
+    protected ILocatable userLocation;
     public LocatableUser(String email, String password) {
         super(email, password);
+
     }
 
     @Override
-    public void setEntityLocation(Location loc) {
+    public void setEntityLocation(ILocatable loc) {
         this.userLocation = loc;
     }
 
     @Override
-    public Location getEntityLocation() {
+    public ILocatable getEntityLocation() {
         return this.userLocation;
     }
 }
