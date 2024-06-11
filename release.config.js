@@ -8,7 +8,7 @@ const TESTING_DISTRIBUTION_BRANCH = "integrator-testing";
 const ADDENDUM_DISTRIBUTION_BRANCH = "integrator-testing-2"
 
 const config = {
-    branches: [ADDENDUM_DISTRIBUTION_BRANCH,{name: TESTING_DISTRIBUTION_BRANCH, prerelease: true}]
+    branches: [ADDENDUM_DISTRIBUTION_BRANCH,{name: TESTING_DISTRIBUTION_BRANCH, prerelease: true}],
     plugins: [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
