@@ -34,7 +34,6 @@ jobs:
         uses: actions/download-artifact@v4.1.7
         with:
           name: Hyper.apk
-          path: $GITHUB_WORKSPACE
           github-token: ${{ secrets.github_token }}
 
       - name: Execute semantic-release
