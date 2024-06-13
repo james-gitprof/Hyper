@@ -21,11 +21,16 @@ android {
         targetSdk 34
         versionCode 1
         versionName "1.0"
+        android.buildFeatures.buildConfig true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary true
         }
+
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("local.properties").newDataInputStream())
+        buildConfigField "String", "DATABASE_API_KEY", "\"${properties.getProperty("DATABASE_API_KEY")}\""
     }
 
     buildTypes {
