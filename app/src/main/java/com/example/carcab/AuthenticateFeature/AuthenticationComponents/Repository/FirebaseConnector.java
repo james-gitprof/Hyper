@@ -39,5 +39,4 @@ public class FirebaseConnector {
     {
         return this.mDatabase;
     }
-
 }
