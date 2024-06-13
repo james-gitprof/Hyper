@@ -24,24 +24,9 @@
             android:gravity="center">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/App_Name"
-                android:layout_marginTop="8dp"
-                android:textSize="16sp"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="12dp"
-                android:text="@string/Fragment_Authentication_Login_Header"
-                android:textSize="24sp"/>
+                android:layout_width="129dp"
+                android:layout_height="113dp"
+                android:src="@drawable/logo" />
 
             <com.google.android.material.progressindicator.LinearProgressIndicator
                 android:layout_width="match_parent"
@@ -49,6 +34,15 @@
                 android:indeterminate="true"
                 android:id="@+id/login_progress"
                 android:visibility="gone"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter"
+                android:padding="12dp"
+                android:text="@string/Fragment_Authentication_Login_Header"
+                android:textSize="24sp" />
+
         </LinearLayout>
 
         <!--
@@ -68,22 +62,22 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:startIconDrawable="@drawable/mail_24px"
                 android:id="@+id/login_email_field"
                 android:hint="@string/Authentication_Hint_Email">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/mail_24px"
+                    android:drawablePadding="5dp"
                     android:inputType="textEmailAddress"
-                    android:paddingStart="48dp"/>
+                    android:paddingStart="48dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:startIconDrawable="@drawable/key_24px"
                 android:layout_marginTop="12dp"
                 android:hint="@string/Authentication_Hint_Password"
                 android:id="@+id/login_password_field"
@@ -92,32 +86,38 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/key_24px"
+                    android:drawablePadding="5dp"
                     android:inputType="textPassword"
-                    android:paddingStart="48dp"/>
+                    android:paddingStart="48dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
 
-
             <Button
+                android:id="@+id/login_button"
                 style="@style/Widget.Material3.Button.Icon"
-                app:icon="@drawable/login_24px"
-                android:layout_width="192dp"
+                android:layout_width="257dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:id="@+id/login_button"
-                android:text="@string/Fragment_Authentication_Login"/>
+                android:background="@drawable/btn_bg"
+                android:fontFamily="@font/inter_semibold"
+                android:text="@string/Fragment_Authentication_Login"
+                android:textColor="@color/white"
+                android:textColorLink="#000000" />
 
            <LinearLayout
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:orientation="horizontal"
                android:gravity="center_horizontal">
+
                <TextView
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_marginTop="12dp"
-                   android:text="Tap to register"
+                   android:text="Create an account"
+                   android:fontFamily="@font/inter"
                    android:id="@+id/register_text_clickable"
                    android:textColor="@color/linkTextType"/>
 

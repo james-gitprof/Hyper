@@ -12,58 +12,49 @@
         android:gravity="center">
 
         <LinearLayout
+            android:id="@+id/authentication_greeter_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/authentication_greeter_header"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <ImageView
-                android:layout_width="256dp"
-                android:layout_height="256dp"
-                android:src="@mipmap/ic_launcher"/>
+                android:layout_width="353dp"
+                android:layout_height="384dp"
+                android:src="@drawable/logo" />
 
-            <TextView
-                android:layout_marginTop="12dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="24sp"
-                android:text="@string/Authentication_Greeter" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_below="@id/authentication_greeter_header"
-            android:layout_marginTop="24dp"
-            android:gravity="center">
+            android:layout_marginTop="22dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <Button
-                android:layout_width="128dp"
-                android:layout_height="wrap_content"
-                style="@style/Widget.Material3.Button.Icon"
-                app:icon="@drawable/login_24px"
-                android:text="@string/Fragment_Authentication_Login"
                 android:id="@+id/proceedToLoginFragment"
-                android:layout_marginRight="24dp"
-                />
-
-            <Button
+                style="@style/Widget.Material3.Button.Icon"
                 android:layout_width="128dp"
                 android:layout_height="wrap_content"
-                style="@style/Widget.Material3.Button.Icon"
+                android:layout_marginRight="24dp"
+                android:fontFamily="@font/inter_semibold"
+                android:text="@string/Fragment_Authentication_Login"
+                app:icon="@drawable/login_24px" />
+
+            <Button
                 android:id="@+id/proceedToRegisterFragment"
+                style="@style/Widget.Material3.Button.Icon"
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_semibold"
                 android:text="@string/Fragment_Authentication_Register"
-                app:icon="@drawable/register_24px"
-                />
+                app:icon="@drawable/register_24px" />
 
 
         </LinearLayout>
 
     </RelativeLayout>
-
-
-
 
 </FrameLayout>
