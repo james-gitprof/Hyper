@@ -19,7 +19,7 @@
         android:theme="@style/Theme.HyperAppDev"
         tools:targetApi="31">
         <activity
-            android:name=".UserPageFeature.Customers.Views.UserHomepage"
+            android:name=".UserPageFeature.Customers.Views.UserActivities.UserActivity"
             android:exported="false" />
         <activity
             android:name=".HomeActivity"

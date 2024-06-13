@@ -1,4 +1,4 @@
-package com.example.carcab.UserPageFeature.Customers.Views;
+package com.example.carcab.UserPageFeature.Customers.Views.UserActivities;
 
 import android.os.Bundle;
 
@@ -10,7 +10,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.carcab.R;
 
-public class UserHomepage extends AppCompatActivity {
+public class UserActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,5 +22,7 @@ public class UserHomepage extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
     }
 }

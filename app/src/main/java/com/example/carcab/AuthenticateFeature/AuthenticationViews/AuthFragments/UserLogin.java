@@ -1,5 +1,6 @@
 package com.example.carcab.AuthenticateFeature.AuthenticationViews.AuthFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import com.example.carcab.AuthenticateFeature.AuthenticationComponents.ViewModel
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.ViewModels.AuthViewModelHandler;
 import com.example.carcab.AuthenticateFeature.AuthenticationViews.Abstractions.AuthFragment;
 import com.example.carcab.R;
+import com.example.carcab.UserPageFeature.Customers.Views.UserActivities.UserActivity;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
@@ -61,8 +63,12 @@ public class UserLogin extends AuthFragment {
             }
             else
             {
-                Snackbar.make(getView(), "Regular customer found. Proceeding to Customer's page", Snackbar.LENGTH_SHORT)
-                        .show();
+                /*Snackbar.make(getView(), "Regular customer found. Proceeding to Customer's page", Snackbar.LENGTH_SHORT)
+                        .show();*/
+
+                Intent gotoCustomerActivity = new Intent(getActivity(), UserActivity.class);
+                startActivity(gotoCustomerActivity);
+                getActivity().finish();
             }
         });
 

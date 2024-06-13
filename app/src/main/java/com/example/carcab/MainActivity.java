@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity{
         //inflate and create the map
         setContentView(R.layout.activity_main);
 
-        map = (MapView) findViewById(R.id.map);
+        // map = (MapView) findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setMultiTouchControls(true);
         IMapController mapController = map.getController();
