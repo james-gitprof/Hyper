@@ -18,7 +18,7 @@ public class FirebaseConnector {
     private FirebaseConnector()
     {
         this.mAuth = FirebaseAuth.getInstance();
-        this.mDatabase = FirebaseDatabase.getInstance(BuildConfig.API_KEY).getReference();
+        this.mDatabase = FirebaseDatabase.getInstance(BuildConfig.DATABASE_API_KEY).getReference();
     }
 
     public static FirebaseConnector getInstance()

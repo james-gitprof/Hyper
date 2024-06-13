@@ -22,11 +22,6 @@
             android:name=".UserPageFeature.Customers.Views.UserActivities.UserActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
-            android:exported="true"
-            android:label="@string/title_activity_home"
-            android:theme="@style/Theme.HyperAppDev" />
-        <activity
             android:name=".AuthenticateFeature.AuthenticationViews.AuthActivities.Authentication"
             android:exported="false" />
         <activity

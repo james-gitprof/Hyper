@@ -19,7 +19,7 @@ public abstract class SwitchableFragment extends Fragment {
         FragmentTransaction fragTransact = fragMan.beginTransaction();
 
         fragTransact.replace(R.id.authFragmentContainer, fragment);
-        // fragTransact.addToBackStack(null);
+        fragTransact.addToBackStack(null);
         fragTransact.commit();
     }
 

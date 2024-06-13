@@ -30,7 +30,7 @@ android {
 
         Properties properties = new Properties()
         properties.load(project.rootProject.file("local.properties").newDataInputStream())
-        buildConfigField "String", "API_KEY", "\"${properties.getProperty("API_KEY")}\""
+        buildConfigField "String", "DATABASE_API_KEY", "\"${properties.getProperty("DATABASE_API_KEY")}\""
     }
 
     buildTypes {

@@ -5,8 +5,7 @@
     android:layout_height="200dp"
     android:background="@color/material_dynamic_tertiary40"
     android:gravity="bottom"
-    android:padding="20dp"
-    android:fitsSystemWindows="true">
+    android:padding="20dp">
 
     <ImageView
         android:layout_width="80dp"
