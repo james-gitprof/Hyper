@@ -62,12 +62,11 @@ android {
 
 dependencies {
     implementation libs.firebase.database
-    implementation 'org.osmdroid:osmdroid-android:6.1.18'
     def LIFECYCLE_VERSION = "2.8.1"
     def FRAGMENT_VERSION = "1.7.1"
 
     implementation 'com.mapbox.maps:android:11.4.1'
-    implementation "com.mapbox.navigation:android:2.19.1"
+    //implementation "com.mapbox.navigation:android:2.19.1"
 
 
     implementation "androidx.fragment:fragment:$FRAGMENT_VERSION"
