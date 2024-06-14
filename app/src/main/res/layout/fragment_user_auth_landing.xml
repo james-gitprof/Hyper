@@ -35,21 +35,23 @@
 
             <Button
                 android:id="@+id/proceedToLoginFragment"
-                style="@style/Widget.Material3.Button.Icon"
                 android:layout_width="128dp"
                 android:layout_height="wrap_content"
+                android:background="@drawable/btn_bg"
                 android:layout_marginRight="24dp"
                 android:fontFamily="@font/inter_semibold"
                 android:text="@string/Fragment_Authentication_Login"
+                android:textColor="@color/white"
                 app:icon="@drawable/login_24px" />
 
             <Button
                 android:id="@+id/proceedToRegisterFragment"
-                style="@style/Widget.Material3.Button.Icon"
-                android:layout_width="128dp"
+                android:layout_width="138dp"
                 android:layout_height="wrap_content"
+                android:background="@drawable/btn_bg"
                 android:fontFamily="@font/inter_semibold"
                 android:text="@string/Fragment_Authentication_Register"
+                android:textColor="@color/white"
                 app:icon="@drawable/register_24px" />
 
 

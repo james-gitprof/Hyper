@@ -94,7 +94,6 @@
 
             <Button
                 android:id="@+id/login_button"
-                style="@style/Widget.Material3.Button.Icon"
                 android:layout_width="257dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
