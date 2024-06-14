@@ -66,11 +66,16 @@ dependencies {
     def LIFECYCLE_VERSION = "2.8.1"
     def FRAGMENT_VERSION = "1.7.1"
 
+    implementation 'com.mapbox.maps:android:11.4.1'
+
+
     implementation "androidx.fragment:fragment:$FRAGMENT_VERSION"
     implementation "androidx.lifecycle:lifecycle-viewmodel:$LIFECYCLE_VERSION"
     implementation "androidx.lifecycle:lifecycle-livedata:$LIFECYCLE_VERSION"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$LIFECYCLE_VERSION"
     implementation("com.google.firebase:firebase-auth")
+
+
 
     implementation platform('com.google.firebase:firebase-bom:33.1.0')
     implementation 'com.google.firebase:firebase-analytics'

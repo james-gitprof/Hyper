@@ -26,6 +26,10 @@
             android:exported="true"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.HyperAppDev" />
+        <activity android:name=".MapFeature.MapActivity"
+            android:exported="true"
+            android:label="MapActivity"
+            android:theme="@style/Theme.HyperAppDev"/>
         <activity
             android:name=".AuthenticateFeature.AuthenticationViews.AuthActivities.Authentication"
             android:exported="false" />
