@@ -10,6 +10,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.carcab.MainActivity;
+import com.example.carcab.MainActivity2;
 import com.example.carcab.R;
 
 public class UserHomepage extends AppCompatActivity {
@@ -28,7 +30,8 @@ public class UserHomepage extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(MainActivity.this, MainActivity2.class));
+                Intent intent = new Intent(UserHomepage.this, MainActivity2.class);
+                startActivity(intent);
                 finish();
             }
         }, 3000);

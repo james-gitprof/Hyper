@@ -40,10 +40,6 @@
             android:visibility="gone"/>
     </LinearLayout>
 
-    <!--
-    Form
-    -->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -63,10 +59,9 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/mail_24px"
                 android:drawablePadding="5dp"
                 android:inputType="textEmailAddress"
-                android:paddingStart="48dp" />
+                android:paddingStart="20dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -75,8 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:hint="@string/Authentication_Hint_Password"
-            android:id="@+id/register_password_field"
-            app:endIconMode="password_toggle">
+            android:id="@+id/register_password_field">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -84,7 +78,7 @@
                 android:drawableLeft="@drawable/key_24px"
                 android:drawablePadding="5dp"
                 android:inputType="textPassword"
-                android:paddingStart="48dp" />
+                android:paddingStart="20dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -162,14 +156,13 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/registerbtn"
             style="@style/Widget.Material3.Button.Icon"
-            app:icon="@drawable/register_24px"
-            android:layout_width="192dp"
+            android:layout_width="215dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:id="@+id/registerbtn"
             android:fontFamily="@font/inter_semibold"
-            android:text="@string/Fragment_Authentication_Register"/>
+            android:text="@string/Fragment_Authentication_Register" />
 
         <TextView
             android:layout_width="wrap_content"

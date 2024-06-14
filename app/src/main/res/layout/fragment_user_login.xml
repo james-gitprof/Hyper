@@ -24,7 +24,7 @@
             android:gravity="center">
 
             <ImageView
-                android:layout_width="129dp"
+                android:layout_width="140dp"
                 android:layout_height="113dp"
                 android:src="@drawable/logo" />
 
@@ -68,10 +68,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/mail_24px"
                     android:drawablePadding="5dp"
                     android:inputType="textEmailAddress"
-                    android:paddingStart="48dp" />
+                    android:paddingStart="20dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -86,10 +85,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/key_24px"
                     android:drawablePadding="5dp"
                     android:inputType="textPassword"
-                    android:paddingStart="48dp" />
+                    android:paddingStart="20dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
