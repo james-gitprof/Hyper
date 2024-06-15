@@ -34,7 +34,7 @@ public class AuthViewModelHandler {
         if (mSelfAuthVM == null)
         {
             mSelfAuthVM = new AuthViewModelHandler();
-            mSelfAuthVM.setAuthenticator(new RegularAuth());
+            mSelfAuthVM.setAuthenticator(RegularAuth.getInstance());
         }
         return mSelfAuthVM;
     }

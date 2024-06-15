@@ -39,14 +39,14 @@ public class UserAuthLanding extends AuthFragment {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchFragment(new UserLogin());
+                switchFragment(R.id.authFragmentContainer,new UserLogin());
             }
         });
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchFragment(new UserRegister());
+                switchFragment(R.id.authFragmentContainer,new UserRegister());
             }
         });
     }
