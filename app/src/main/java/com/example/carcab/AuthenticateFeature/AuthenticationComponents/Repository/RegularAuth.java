@@ -23,6 +23,22 @@ import java.util.Map;
 
 public class RegularAuth implements IAuthenticate {
 
+    private static RegularAuth mRegularAuth;
+
+    private RegularAuth()
+    {
+
+    }
+
+    public static RegularAuth getInstance()
+    {
+        if (mRegularAuth == null)
+        {
+            mRegularAuth = new RegularAuth();
+        }
+        return mRegularAuth;
+    }
+
     @Override
     public boolean performRegister(UserInfo info) {
         boolean registerResult = FirebaseConnector.getInstance()

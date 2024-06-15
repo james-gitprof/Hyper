@@ -109,7 +109,7 @@ public class UserLogin extends AuthFragment {
         tappableRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchFragment(new UserRegister());
+                switchFragment(R.id.authFragmentContainer,new UserRegister());
             }
         });
     }

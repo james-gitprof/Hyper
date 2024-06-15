@@ -24,7 +24,7 @@
                 android:minHeight="?attr/actionBarSize"
                 app:title="@string/App_Name"
                 app:navigationIcon="@drawable/menu_24px"
-                app:menu="@menu/user_menu"
+                app:menu="@menu/user_menubar"
                 app:titleCentered="true"
                 app:subtitle="Customer Mode"
                 app:subtitleCentered="true"/>
@@ -37,7 +37,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragmentContainerView"
+                android:id="@+id/userCustomerFragmentContainerView"
                 android:name="com.example.carcab.UserPageFeature.Customers.Views.UserFragments.Home"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
