@@ -13,12 +13,12 @@ plugins {
 
 android {
     namespace 'com.example.carcab'
-    compileSdk 34
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.carcab"
         minSdk 24
-        targetSdk 34
+        targetSdk 33
         versionCode 1
         versionName "1.0"
         android.buildFeatures.buildConfig true
@@ -65,9 +65,9 @@ dependencies {
     def LIFECYCLE_VERSION = "2.8.1"
     def FRAGMENT_VERSION = "1.7.1"
 
-    implementation 'com.mapbox.maps:android:11.4.1'
-    implementation "com.mapbox.navigationcore:navigation:3.2.0-beta.1"
-
+    //implementation 'com.mapbox.maps:android:11.4.1'
+    //implementation "com.mapbox.navigationcore:navigation:3.2.0-beta.1"
+    implementation 'com.mapbox.navigation:android:2.15.2'
 
     implementation "androidx.fragment:fragment:$FRAGMENT_VERSION"
     implementation "androidx.lifecycle:lifecycle-viewmodel:$LIFECYCLE_VERSION"

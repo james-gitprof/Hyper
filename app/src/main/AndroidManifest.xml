@@ -24,6 +24,7 @@
             android:foregroundServiceType="location" >
         </service>
 
+
         <activity
             android:name=".UserPageFeature.Customers.Views.UserHomepage"
             android:exported="false" />
