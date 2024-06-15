@@ -30,11 +30,20 @@ jobs:
         with:
           node-version: 20
 
-      - run: npm ci
+      - name: Install required dependencies
+        run: npm clean-install
 
       - name: Download artifact
         uses: actions/download-artifact@v4.1.7
         with:
           name: Hyper.apk
           github-token: ${{ secrets.github_token }}
+
+      - name: Print current working directory from checkout
+        run: ls
+
+      - name: Release build
+        env:
+          GITHUB_TOKEN: ${{ secrets.github_token }}
+        run: npx semantic-release
 
