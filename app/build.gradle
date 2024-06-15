@@ -66,7 +66,7 @@ dependencies {
     def FRAGMENT_VERSION = "1.7.1"
 
     implementation 'com.mapbox.maps:android:11.4.1'
-    //implementation "com.mapbox.navigation:android:2.19.1"
+    implementation "com.mapbox.navigationcore:navigation:3.2.0-beta.1"
 
 
     implementation "androidx.fragment:fragment:$FRAGMENT_VERSION"

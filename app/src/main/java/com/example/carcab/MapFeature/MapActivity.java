@@ -2,6 +2,12 @@ package com.example.carcab.MapFeature;
 
 import static com.mapbox.maps.plugin.gestures.GesturesUtils.getGestures;
 import static com.mapbox.maps.plugin.locationcomponent.LocationComponentUtils.getLocationComponent;
+import static com.mapbox.maps.plugin.animation.CameraAnimationsUtils.getCamera;
+import static com.mapbox.maps.plugin.gestures.GesturesUtils.addOnMapClickListener;
+import static com.mapbox.maps.plugin.gestures.GesturesUtils.getGestures;
+import static com.mapbox.maps.plugin.locationcomponent.LocationComponentUtils.getLocationComponent;
+import static com.mapbox.navigation.base.extensions.RouteOptionsExtensions.applyDefaultNavigationOptions;
+
 
 import android.Manifest;
 import android.app.Activity;
