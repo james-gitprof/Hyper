@@ -13,7 +13,7 @@ plugins {
 
 android {
     namespace 'com.example.carcab'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.carcab"
@@ -62,8 +62,8 @@ android {
 
 dependencies {
     implementation libs.firebase.database
-    def LIFECYCLE_VERSION = "2.8.1"
-    def FRAGMENT_VERSION = "1.7.1"
+    def LIFECYCLE_VERSION = "2.4.1"
+    def FRAGMENT_VERSION = "1.4.1"
 
     //implementation 'com.mapbox.maps:android:11.4.1'
     //implementation "com.mapbox.navigationcore:navigation:3.2.0-beta.1"
