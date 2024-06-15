@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.util.Log;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +21,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Repository.IAuthenticate;
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Repository.RegularAuth;
 import com.example.carcab.AuthenticateFeature.AuthenticationViews.AuthActivities.Authentication;
@@ -29,7 +28,6 @@ import com.example.carcab.R;
 import com.example.carcab.UserPageFeature.Customers.ViewModels.CustomerViewModel;
 import com.example.carcab.UserPageFeature.Customers.ViewModels.CustomerViewModelHandler;
 import com.example.carcab.UserPageFeature.Customers.Views.UserFragments.Home;
-import com.example.carcab.UserPageFeature.Customers.Views.UserFragments.UserProfile;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -39,7 +37,6 @@ public class UserActivity extends AppCompatActivity {
     private MaterialToolbar userAppBar;
     private NavigationView userNavView;
     private DrawerLayout drawerLayout;
-
     private CustomerViewModel mCustomerViewModel;
 
     private TextView displayNameText;
@@ -48,7 +45,6 @@ public class UserActivity extends AppCompatActivity {
     private IAuthenticate authenticator;
 
     private Context userActivity;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +102,8 @@ public class UserActivity extends AppCompatActivity {
         displayNameText = findViewById(R.id.nav_loggeduser_display_name);
     }
 
-    private void addNavsListener() {
+    private void addNavsListener()
+    {
         userAppBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

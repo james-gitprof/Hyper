@@ -17,7 +17,6 @@ public abstract class SwitchableFragment extends Fragment {
     {
         FragmentManager fragMan = getActivity().getSupportFragmentManager();
         FragmentTransaction fragTransact = fragMan.beginTransaction();
-
         fragTransact.replace(containerViewId, fragment);
         fragTransact.addToBackStack(null);
         fragTransact.commit();
