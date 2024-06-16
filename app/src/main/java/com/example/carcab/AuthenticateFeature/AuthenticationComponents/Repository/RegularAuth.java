@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Models.UserInfo;
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.ViewModels.AuthStrictViewModel;
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.ViewModels.AuthViewModelHandler;
+import com.example.carcab.BuildConfig;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -25,14 +26,11 @@ public class RegularAuth implements IAuthenticate {
 
     private static RegularAuth mRegularAuth;
 
-    private Map<String, Boolean> nonActiveUser, activeUser;
+    private final String USER_KEY_STATUS = "searchActive";
 
     private RegularAuth()
     {
-        nonActiveUser = new HashMap<>();
-        nonActiveUser.put("active", false);
-        activeUser = new HashMap<>();
-        activeUser.put("active", true);
+
     }
 
     public static RegularAuth getInstance()
@@ -69,6 +67,7 @@ public class RegularAuth implements IAuthenticate {
                                 try {
                                     details.put("email", info.getEmail());
                                     details.put("vehicleType", info.getVehicle().getVehicleType());
+                                    details.put(USER_KEY_STATUS, "false");
                                 } catch (Exception e) {
                                     throw new RuntimeException(e);
                                 }
@@ -82,7 +81,7 @@ public class RegularAuth implements IAuthenticate {
                                                 .getCurrentUser()
                                                 .getUid());
                                         driverDatabaseRef.setValue(details);
-                                        driverDatabaseRef.setValue(nonActiveUser);
+
 
                             }
                             else
@@ -96,6 +95,7 @@ public class RegularAuth implements IAuthenticate {
                              */
                                 Map<java.lang.String, java.lang.String> details = new HashMap<>();
                                 details.put("email", info.getEmail());
+                                details.put(USER_KEY_STATUS, "false");
                                 DatabaseReference userDatabaseRef = FirebaseConnector.getInstance()
                                         .getFirebaseDatabaseInstance()
                                         .child("Users")
@@ -105,7 +105,6 @@ public class RegularAuth implements IAuthenticate {
                                                 .getFirebaseAuthInstance()
                                                 .getUid());
                                         userDatabaseRef.setValue(details);
-                                        userDatabaseRef.setValue(nonActiveUser);
                             }
                             // Afterwards, clear the cache in case.
                             // By default, on registration success Firebase will set the current user

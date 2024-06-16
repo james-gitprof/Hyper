@@ -18,7 +18,7 @@ android {
     defaultConfig {
         applicationId "com.example.carcab"
         minSdk 24
-        targetSdk 34
+        targetSdk 33
         versionCode 1
         versionName "1.0"
         android.buildFeatures.buildConfig true
@@ -31,6 +31,8 @@ android {
         Properties properties = new Properties()
         properties.load(project.rootProject.file("local.properties").newDataInputStream())
         buildConfigField "String", "DATABASE_API_KEY", "\"${properties.getProperty("DATABASE_API_KEY")}\""
+        buildConfigField "String", "MAPBOX_API_KEY", "\"${properties.getProperty("MAPBOX_API_KEY")}\""
+        buildConfigField "String", "MAPBOX_PUBLIC_API_KEY", "\"${properties.getProperty("MAPBOX_PUBLIC_API_KEY")}\""
     }
 
     buildTypes {
