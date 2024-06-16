@@ -25,9 +25,14 @@ public class RegularAuth implements IAuthenticate {
 
     private static RegularAuth mRegularAuth;
 
+    private Map<String, Boolean> nonActiveUser, activeUser;
+
     private RegularAuth()
     {
-
+        nonActiveUser = new HashMap<>();
+        nonActiveUser.put("active", false);
+        activeUser = new HashMap<>();
+        activeUser.put("active", true);
     }
 
     public static RegularAuth getInstance()
@@ -67,7 +72,7 @@ public class RegularAuth implements IAuthenticate {
                                 } catch (Exception e) {
                                     throw new RuntimeException(e);
                                 }
-                                FirebaseConnector.getInstance()
+                                DatabaseReference driverDatabaseRef = FirebaseConnector.getInstance()
                                         .getFirebaseDatabaseInstance()
                                         .child("Users")
                                         .child("Drivers")
@@ -75,8 +80,9 @@ public class RegularAuth implements IAuthenticate {
                                                 .getInstance()
                                                 .getFirebaseAuthInstance()
                                                 .getCurrentUser()
-                                                .getUid())
-                                        .setValue(details);
+                                                .getUid());
+                                        driverDatabaseRef.setValue(details);
+                                        driverDatabaseRef.setValue(nonActiveUser);
 
                             }
                             else
@@ -90,15 +96,16 @@ public class RegularAuth implements IAuthenticate {
                              */
                                 Map<java.lang.String, java.lang.String> details = new HashMap<>();
                                 details.put("email", info.getEmail());
-                                FirebaseConnector.getInstance()
+                                DatabaseReference userDatabaseRef = FirebaseConnector.getInstance()
                                         .getFirebaseDatabaseInstance()
                                         .child("Users")
                                         .child("Customers")
                                         .child(FirebaseConnector
                                                 .getInstance()
                                                 .getFirebaseAuthInstance()
-                                                .getUid())
-                                        .setValue(details);
+                                                .getUid());
+                                        userDatabaseRef.setValue(details);
+                                        userDatabaseRef.setValue(nonActiveUser);
                             }
                             // Afterwards, clear the cache in case.
                             // By default, on registration success Firebase will set the current user
