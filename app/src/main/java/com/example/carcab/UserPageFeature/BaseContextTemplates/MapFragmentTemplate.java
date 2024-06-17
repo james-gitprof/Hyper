@@ -23,6 +23,7 @@ import com.example.carcab.Defaults.UserState;
 import com.example.carcab.R;
 import com.example.carcab.UserPageFeature.Location;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -134,6 +135,80 @@ public abstract class MapFragmentTemplate extends Fragment {
                 }
             }
         });
+    }
+
+    protected void selfChangedListener(boolean driverMode, TextView statusTextDisplay)
+    {
+        DatabaseReference rootNode = FirebaseConnector.getInstance().getFirebaseDatabaseInstance().child("Users");
+        FirebaseUser user = FirebaseConnector.getInstance().getFirebaseAuthInstance().getCurrentUser();
+        if(driverMode)
+        {
+            DatabaseReference selfDriver = rootNode.child("Drivers").child(user.getUid());
+            selfDriver.addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                }
+
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                    if(snapshot.getValue().toString().equals("false"))
+                    {
+                        requestButton.setEnabled(true);
+                        statusTextDisplay.setText("Customer found! Please proceed to the location.");
+                    }
+                }
+
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+        else
+        {
+            DatabaseReference selfCustomer = rootNode.child("Customers").child(user.getUid());
+            selfCustomer.addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                }
+
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                    if (snapshot.getValue().toString().equals("false"))
+                    {
+                        requestButton.setEnabled(true);
+                        statusTextDisplay.setText("Driver found! Please wait until the driver arrives.");
+                    }
+                }
+
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
     }
 
     protected void setDatabaseDriverOrCustomerFoundListener(TextView statusTextDisplay, boolean driverMode)

@@ -41,6 +41,7 @@ public class DriverHomeFragment extends MapFragmentTemplate {
                 getView().findViewById(R.id.btn_driver_active));
         setupEssentialIndicatorListeners();
         userMapStyleSet(getActivity());
+        selfChangedListener(true, getView().findViewById(R.id.driver_txt_status));
         addBtnListener(getView().findViewById(R.id.driver_txt_status), true);
         //setDatabaseDriverOrCustomerFoundListener(getView().findViewById(R.id.driver_txt_status), true);
     }

@@ -36,6 +36,7 @@ public class CustomerHome extends MapFragmentTemplate {
                 getView().findViewById(R.id.btn_request_pickup));
         setupEssentialIndicatorListeners();
         userMapStyleSet(getActivity());
+        selfChangedListener(false, getView().findViewById(R.id.txt_status));
         addBtnListener(getView().findViewById(R.id.txt_status), false);
         //setDatabaseDriverOrCustomerFoundListener(getView().findViewById(R.id.txt_status), false);
     }
