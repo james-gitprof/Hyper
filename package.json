@@ -1,0 +1,27 @@
+{
+  "name": "hyper",
+  "version": "0.1.1",
+  "description": "My configuration file for automated project assembly file with node modules",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elysian-dawnbreaker/Hyper.git"
+  },
+  "keywords": [
+    "school-project",
+    "config"
+  ],
+  "author": "James",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elysian-dawnbreaker/Hyper/issues"
+  },
+  "homepage": "https://github.com/elysian-dawnbreaker/Hyper#readme",
+  "devDependencies": {
+    "@semantic-release/git": "^10.0.1",
+    "semantic-release": "^24.0.0"
+  }
+}
