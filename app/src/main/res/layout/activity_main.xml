@@ -29,7 +29,7 @@
             android:background="@color/white">
 
             <ImageView
-                android:id="@+id/imageView9"
+                android:id="@+id/whitebg"
                 android:layout_width="413dp"
                 android:layout_height="58dp"
                 android:layout_marginBottom="16dp"
@@ -38,17 +38,29 @@
                 tools:layout_editor_absoluteX="-1dp" />
 
             <ImageView
-                android:id="@+id/imageView10"
+                android:id="@+id/profileDriver"
                 android:layout_width="124dp"
                 android:layout_height="118dp"
-                app:layout_constraintBottom_toTopOf="@+id/imageView9"
+                app:layout_constraintBottom_toTopOf="@+id/whitebg"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imageView9"
-                app:layout_constraintVertical_bias="0.819"
+                app:layout_constraintTop_toTopOf="@+id/whitebg"
+                app:layout_constraintVertical_bias="0.72"
                 app:srcCompat="@drawable/profiledriver" />
 
+            <ImageView
+                android:id="@+id/edit"
+                android:layout_width="41dp"
+                android:layout_height="31dp"
+                app:layout_constraintBottom_toBottomOf="@+id/whitebg"
+                app:layout_constraintEnd_toEndOf="@+id/profileDriver"
+                app:layout_constraintTop_toTopOf="@+id/whitebg"
+                app:layout_constraintVertical_bias="1.0"
+                app:srcCompat="@drawable/edit" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
                 android:layout_width="45dp"
                 android:layout_height="42dp"
                 android:layout_marginStart="32dp"
@@ -137,7 +149,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="35dp"
                 android:layout_marginBottom="10dp"
-                android:fontFamily="@font/inter_medium"
+                android:fontFamily="@font/inter_semibold"
+                android:textColor="@color/black"
                 android:paddingTop="20dp"
                 android:text="Car"
                 android:textSize="15sp" />
@@ -262,6 +275,8 @@
                 android:layout_width="301dp"
                 android:layout_height="52dp"
                 android:text="CONFIRM"
+                android:background="@drawable/btn_bg"
+                android:textColor="@color/white"
                 android:fontFamily="@font/inter_semibold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
