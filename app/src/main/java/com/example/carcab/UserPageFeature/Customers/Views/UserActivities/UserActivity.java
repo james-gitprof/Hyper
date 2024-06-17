@@ -1,8 +1,10 @@
 package com.example.carcab.UserPageFeature.Customers.Views.UserActivities;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -24,16 +27,24 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Repository.IAuthenticate;
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Repository.RegularAuth;
 import com.example.carcab.AuthenticateFeature.AuthenticationViews.AuthActivities.Authentication;
+import com.example.carcab.BuildConfig;
 import com.example.carcab.R;
 import com.example.carcab.UserPageFeature.Customers.ViewModels.CustomerViewModel;
 import com.example.carcab.UserPageFeature.Customers.ViewModels.CustomerViewModelHandler;
+import com.example.carcab.UserPageFeature.Customers.Views.MapAppCompatActivity;
 import com.example.carcab.UserPageFeature.Customers.Views.UserFragments.Home;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseUser;
+import com.mapbox.maps.MapInitOptions;
+import com.mapbox.maps.ResourceOptions;
+import com.mapbox.maps.ResourceOptionsManager;
+import com.mapbox.maps.plugin.Plugin;
 
-public class UserActivity extends AppCompatActivity {
+import java.util.Map;
+
+public class UserActivity extends MapAppCompatActivity {
     private MaterialToolbar userAppBar;
     private NavigationView userNavView;
     private DrawerLayout drawerLayout;
@@ -48,6 +59,8 @@ public class UserActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //MapboxOptions.accessToken = BuildConfig.MAPBOX_PUBLIC_API_KEY;
+
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_userpage_customer);
@@ -57,6 +70,7 @@ public class UserActivity extends AppCompatActivity {
             return insets;
         });
         initializeEssentialComp();
+        setupActivityLauncherPerms();
         addViewReferences();
         addNavsListener();
         addNavViewListener();
@@ -76,6 +90,15 @@ public class UserActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void setupActivityLauncherPerms()
+    {
+        if (ActivityCompat.checkSelfPermission(UserActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            setupEssentialFirstActivityLauncher(UserActivity.this);
+            activityResultLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION);
+        }
     }
 
     public CustomerViewModel getActivityViewModel() {
