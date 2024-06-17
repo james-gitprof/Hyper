@@ -12,44 +12,33 @@
     -->
 
     <LinearLayout
+        android:id="@+id/user_auth_register_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="24dp"
+        android:gravity="center"
         android:orientation="vertical"
-        android:id="@+id/user_auth_register_header"
-        android:gravity="center">
+        android:padding="24dp">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"/>
+            android:layout_width="150dp"
+            android:layout_height="86dp"
+            android:src="@drawable/logo" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/App_Name"
-            android:layout_marginTop="8dp"
-            android:textSize="16sp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter"
             android:padding="12dp"
             android:text="@string/Fragment_Authentication_Register_Header"
-            android:textSize="24sp"/>
+            android:textSize="24sp" />
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/register_progress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:indeterminate="true"
-            android:id="@+id/register_progress"
-            android:visibility="gone"/>
+            android:visibility="gone" />
     </LinearLayout>
-
-    <!--
-    Form
-    -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -64,49 +53,31 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:startIconDrawable="@drawable/mail_24px"
             android:id="@+id/register_email_field"
             android:hint="@string/Authentication_Hint_Email">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawablePadding="5dp"
                 android:inputType="textEmailAddress"
-                android:paddingStart="48dp"/>
+                android:paddingStart="20dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:startIconDrawable="@drawable/key_24px"
             android:layout_marginTop="12dp"
             android:hint="@string/Authentication_Hint_Password"
-            android:id="@+id/register_password_field"
-            app:endIconMode="password_toggle">
+            android:id="@+id/register_password_field">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawablePadding="5dp"
                 android:inputType="textPassword"
-                android:paddingStart="48dp"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:startIconDrawable="@drawable/shield_24px"
-            android:layout_marginTop="12dp"
-            android:hint="@string/Authentication_Hint_Confirmation_Password"
-            app:endIconMode="password_toggle"
-            android:id="@+id/register_confirmpassword_field">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:paddingStart="48dp"/>
+                android:paddingStart="20dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -130,18 +101,19 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="64dp"
+                        android:layout_height="42dp"
                         android:scaleType="center"
-                        android:src="@drawable/person_24px"/>
+                        android:src="@drawable/person_24px" />
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
+                        android:fontFamily="@font/inter"
                         android:text="@string/Authentication_Card_Person" />
 
                 </LinearLayout>
@@ -160,19 +132,20 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center">
+                    android:layout_height="71dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="64dp"
+                        android:layout_height="40dp"
                         android:scaleType="center"
-                        android:src="@drawable/driver_24px"/>
+                        android:src="@drawable/driver_24px" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter"
                         android:text="@string/Authentication_Card_Driver" />
 
                 </LinearLayout>
@@ -182,23 +155,23 @@
         </LinearLayout>
 
         <Button
-            style="@style/Widget.Material3.Button.Icon"
-            app:icon="@drawable/register_24px"
-            android:layout_width="192dp"
+            android:id="@+id/registerbtn"
+            android:layout_width="215dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:id="@+id/registerbtn"
-            android:text="@string/Fragment_Authentication_Register"/>
+            android:background="@drawable/btn_bg"
+            android:fontFamily="@font/inter_semibold"
+            android:text="@string/Fragment_Authentication_Register"
+            android:textColor="@color/white" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="Tap to login"
+            android:text="Continue to login"
             android:id="@+id/register_text_clickable"
             android:textColor="@color/linkTextType"/>
     </LinearLayout>
-
 
 
 </RelativeLayout>

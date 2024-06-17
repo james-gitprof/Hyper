@@ -106,7 +106,7 @@ public class UserRegister extends AuthFragment {
     {
         registerEmailField = ((TextInputLayout) getView().findViewById(R.id.register_email_field)).getEditText();
         registerPasswordField = ((TextInputLayout) getView().findViewById(R.id.register_password_field)).getEditText();
-        registerConfirmPasswordField = ((TextInputLayout) getView().findViewById(R.id.register_confirmpassword_field)).getEditText();
+        registerConfirmPasswordField = ((TextInputLayout) getView().findViewById(R.id.register_password_field)).getEditText();
         progressBar = getView().findViewById(R.id.register_progress);
     }
 
