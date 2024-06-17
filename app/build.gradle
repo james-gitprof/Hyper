@@ -18,7 +18,7 @@ android {
     defaultConfig {
         applicationId "com.example.carcab"
         minSdk 24
-        targetSdk 34
+        targetSdk 33
         versionCode 1
         versionName "1.0"
         android.buildFeatures.buildConfig true
@@ -31,6 +31,8 @@ android {
         Properties properties = new Properties()
         properties.load(project.rootProject.file("local.properties").newDataInputStream())
         buildConfigField "String", "DATABASE_API_KEY", "\"${properties.getProperty("DATABASE_API_KEY")}\""
+        buildConfigField "String", "MAPBOX_API_KEY", "\"${properties.getProperty("MAPBOX_API_KEY")}\""
+        buildConfigField "String", "MAPBOX_PUBLIC_API_KEY", "\"${properties.getProperty("MAPBOX_PUBLIC_API_KEY")}\""
     }
 
     buildTypes {
@@ -41,8 +43,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = '1.8'
@@ -62,10 +64,13 @@ android {
 
 dependencies {
     implementation libs.firebase.database
-    implementation 'org.osmdroid:osmdroid-android:6.1.18'
-    def LIFECYCLE_VERSION = "2.8.1"
-    def FRAGMENT_VERSION = "1.7.1"
+    /*def LIFECYCLE_VERSION = "2.8.1"
+    def FRAGMENT_VERSION = "1.7.1"*/
+    def LIFECYCLE_VERSION = "2.4.1"
+    def FRAGMENT_VERSION = "1.4.1"
+    def MAPBOX_VERSION = "2.15.2"
 
+    implementation "com.mapbox.navigation:android:$MAPBOX_VERSION"
     implementation "androidx.fragment:fragment:$FRAGMENT_VERSION"
     implementation "androidx.lifecycle:lifecycle-viewmodel:$LIFECYCLE_VERSION"
     implementation "androidx.lifecycle:lifecycle-livedata:$LIFECYCLE_VERSION"

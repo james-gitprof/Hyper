@@ -4,8 +4,8 @@
     <item android:id="@+id/subheader_functions" android:title="Main">
         <menu>
             <item
-                android:id="@+id/nav_find_a_driver"
-                android:title="Find a Driver"
+                android:id="@+id/driver_nav_find_a_customer"
+                android:title="Find a Customer"
                 android:checkable="true"
                 android:icon="@drawable/driver_24px"/>
         </menu>
@@ -13,7 +13,7 @@
     <item android:id="@+id/subheader_account" android:title="Account">
         <menu>
             <item
-                android:id="@+id/nav_user_logout"
+                android:id="@+id/driver_nav_user_logout"
                 android:title="Logout"
                 android:checkable="true"
                 android:icon="@drawable/key_24px" />
@@ -23,7 +23,7 @@
         android:title="Extras">
         <menu>
             <item
-                android:id="@+id/nav_user_aboutus"
+                android:id="@+id/driver_nav_user_aboutus"
                 android:title="About Us"
                 android:icon="@drawable/person_24px"
                 android:checkable="true" />
