@@ -25,7 +25,6 @@ import java.util.Map;
 public class RegularAuth implements IAuthenticate {
 
     private static RegularAuth mRegularAuth;
-
     private final String USER_KEY_STATUS = "searchActive";
 
     private RegularAuth()
