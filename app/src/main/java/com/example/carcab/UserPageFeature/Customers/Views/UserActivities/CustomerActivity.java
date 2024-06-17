@@ -9,11 +9,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.util.Log;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -27,31 +25,24 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Repository.IAuthenticate;
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.Repository.RegularAuth;
 import com.example.carcab.AuthenticateFeature.AuthenticationViews.AuthActivities.Authentication;
-import com.example.carcab.BuildConfig;
 import com.example.carcab.R;
-import com.example.carcab.UserPageFeature.Customers.ViewModels.CustomerViewModel;
-import com.example.carcab.UserPageFeature.Customers.ViewModels.CustomerViewModelHandler;
-import com.example.carcab.UserPageFeature.Customers.Views.MapAppCompatActivity;
-import com.example.carcab.UserPageFeature.Customers.Views.UserFragments.Home;
+import com.example.carcab.UserPageFeature.Customers.ViewModels.UserViewModel;
+import com.example.carcab.UserPageFeature.Customers.ViewModels.UserViewModelHandler;
+import com.example.carcab.UserPageFeature.BaseContextTemplates.MapAppCompatActivity;
+import com.example.carcab.UserPageFeature.Customers.Views.UserFragments.CustomerHome;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseUser;
-import com.mapbox.maps.MapInitOptions;
-import com.mapbox.maps.ResourceOptions;
-import com.mapbox.maps.ResourceOptionsManager;
-import com.mapbox.maps.plugin.Plugin;
 
-import java.util.Map;
-
-public class UserActivity extends MapAppCompatActivity {
+public class CustomerActivity extends MapAppCompatActivity {
     private MaterialToolbar userAppBar;
     private NavigationView userNavView;
     private DrawerLayout drawerLayout;
-    private CustomerViewModel mCustomerViewModel;
+    private UserViewModel mUserViewModel;
 
     private TextView displayNameText;
-    private CustomerViewModelHandler VMHandler;
+    private UserViewModelHandler VMHandler;
 
     private IAuthenticate authenticator;
 
@@ -75,7 +66,7 @@ public class UserActivity extends MapAppCompatActivity {
         addNavsListener();
         addNavViewListener();
         defaultMenuItemChecked();
-        mCustomerViewModel.getUserSessionState().observe(this, new Observer<FirebaseUser>() {
+        mUserViewModel.getUserSessionState().observe(this, new Observer<FirebaseUser>() {
             @Override
             public void onChanged(FirebaseUser firebaseUser) {
                 if (firebaseUser != null) {
@@ -94,15 +85,15 @@ public class UserActivity extends MapAppCompatActivity {
 
     private void setupActivityLauncherPerms()
     {
-        if (ActivityCompat.checkSelfPermission(UserActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        if (ActivityCompat.checkSelfPermission(CustomerActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
         {
-            setupEssentialFirstActivityLauncher(UserActivity.this);
+            setupEssentialFirstActivityLauncher(CustomerActivity.this);
             activityResultLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION);
         }
     }
 
-    public CustomerViewModel getActivityViewModel() {
-        return this.mCustomerViewModel;
+    public UserViewModel getActivityViewModel() {
+        return this.mUserViewModel;
     }
 
     @Override
@@ -113,8 +104,8 @@ public class UserActivity extends MapAppCompatActivity {
 
     private void initializeEssentialComp()
     {
-        mCustomerViewModel = new ViewModelProvider(this).get(CustomerViewModel.class);
-        VMHandler = CustomerViewModelHandler.getInstance();
+        mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        VMHandler = UserViewModelHandler.getInstance();
         userActivity = this;
         authenticator = RegularAuth.getInstance();
     }
@@ -157,7 +148,7 @@ public class UserActivity extends MapAppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 boolean isOk = false;
                 if (item.getItemId() == R.id.nav_find_a_driver) {
-                    activityFragmentSwitcher(R.id.userCustomerFragmentContainerView, new Home());
+                    activityFragmentSwitcher(R.id.userCustomerFragmentContainerView, new CustomerHome());
                 }
                 if (item.getItemId() == R.id.nav_user_logout)
                 {

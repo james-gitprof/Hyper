@@ -6,11 +6,11 @@ import androidx.lifecycle.ViewModel;
 
 import com.google.firebase.auth.FirebaseUser;
 
-public class CustomerViewModel extends ViewModel
+public class UserViewModel extends ViewModel
 {
-    private static CustomerViewModel mCustomerViewModel;
+    private static UserViewModel mUserViewModel;
 
-    private CustomerViewModel()
+    private UserViewModel()
     {
 
     }
@@ -20,13 +20,13 @@ public class CustomerViewModel extends ViewModel
         this.userInSession.setValue(user);
     }
 
-    public static CustomerViewModel getInstance()
+    public static UserViewModel getInstance()
     {
-        if (mCustomerViewModel == null)
+        if (mUserViewModel == null)
         {
-            mCustomerViewModel = new CustomerViewModel();
+            mUserViewModel = new UserViewModel();
         }
-        return mCustomerViewModel;
+        return mUserViewModel;
     }
 
     private final MutableLiveData<FirebaseUser> userInSession = new MutableLiveData<>();

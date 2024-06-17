@@ -4,16 +4,15 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.carcab.R;
-import com.example.carcab.UserPageFeature.Customers.Views.MapFragmentTemplate;
+import com.example.carcab.UserPageFeature.BaseContextTemplates.MapFragmentTemplate;
 
-public class Home extends MapFragmentTemplate {
+public class CustomerHome extends MapFragmentTemplate {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,5 +37,6 @@ public class Home extends MapFragmentTemplate {
         setupEssentialIndicatorListeners();
         userMapStyleSet(getActivity());
         addBtnListener(getView().findViewById(R.id.txt_status), false);
+        //setDatabaseDriverOrCustomerFoundListener(getView().findViewById(R.id.txt_status), false);
     }
 }

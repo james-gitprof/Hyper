@@ -22,7 +22,7 @@
             android:name=".UserPageFeature.Drivers.Views.UserActivities.DriverActivity"
             android:exported="false" />
         <activity
-            android:name=".UserPageFeature.Customers.Views.UserActivities.UserActivity"
+            android:name=".UserPageFeature.Customers.Views.UserActivities.CustomerActivity"
             android:exported="false" />
         <activity
             android:name=".AuthenticateFeature.AuthenticationViews.AuthActivities.Authentication"

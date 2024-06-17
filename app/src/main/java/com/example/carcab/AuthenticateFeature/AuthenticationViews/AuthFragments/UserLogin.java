@@ -18,7 +18,8 @@ import com.example.carcab.AuthenticateFeature.AuthenticationComponents.ViewModel
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.ViewModels.AuthViewModelHandler;
 import com.example.carcab.AuthenticateFeature.AuthenticationViews.Abstractions.AuthFragment;
 import com.example.carcab.R;
-import com.example.carcab.UserPageFeature.Customers.Views.UserActivities.UserActivity;
+import com.example.carcab.UserPageFeature.Customers.Views.UserActivities.CustomerActivity;
+import com.example.carcab.UserPageFeature.Drivers.Views.UserActivities.DriverActivity;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
@@ -58,15 +59,16 @@ public class UserLogin extends AuthFragment {
             // pass UserInfo to next activity
             if (e.isDriver())
             {
-                Snackbar.make(getView(), "Driver found. Proceeding to Driver's page", Snackbar.LENGTH_SHORT)
-                        .show();
+                Intent gotoDriverActivity = new Intent(getActivity(), DriverActivity.class);
+                startActivity(gotoDriverActivity);
+                getActivity().finish();
             }
             else
             {
                 /*Snackbar.make(getView(), "Regular customer found. Proceeding to Customer's page", Snackbar.LENGTH_SHORT)
                         .show();*/
 
-                Intent gotoCustomerActivity = new Intent(getActivity(), UserActivity.class);
+                Intent gotoCustomerActivity = new Intent(getActivity(), CustomerActivity.class);
                 startActivity(gotoCustomerActivity);
                 getActivity().finish();
             }

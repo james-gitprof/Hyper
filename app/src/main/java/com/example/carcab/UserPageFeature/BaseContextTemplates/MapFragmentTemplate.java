@@ -1,4 +1,4 @@
-package com.example.carcab.UserPageFeature.Customers.Views;
+package com.example.carcab.UserPageFeature.BaseContextTemplates;
 
 import static com.mapbox.maps.plugin.gestures.GesturesUtils.getGestures;
 
@@ -11,6 +11,7 @@ import static com.mapbox.maps.plugin.locationcomponent.LocationComponentUtils.ge
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -78,11 +79,10 @@ public abstract class MapFragmentTemplate extends Fragment {
         requestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                txt.setText("Looking for drivers...");
                 DatabaseReference rootNode = FirebaseConnector.getInstance().getFirebaseDatabaseInstance().child("Users");
                 if (driverMode)
                 {
+                    txt.setText("Looking for customers...");
                     Button driverActiveBtn = requestButton;
                     driverActiveBtn.setEnabled(false);
                     rootNode.child("Drivers").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -92,9 +92,9 @@ public abstract class MapFragmentTemplate extends Fragment {
                             {
                                 if (subSnapshot.getKey().equals(FirebaseConnector.getInstance().getFirebaseAuthInstance().getCurrentUser().getUid()))
                                 {
-
-                                    DatabaseReference customerNode = subSnapshot.getRef();
-                                    customerNode.updateChildren(UserState.getInstanceDefaults().USER_SEARCH_ACTIVE_STATE);
+                                    DatabaseReference driverNode = subSnapshot.getRef();
+                                    driverNode.updateChildren(UserState.getInstanceDefaults().USER_SEARCH_ACTIVE_STATE);
+                                    setDatabaseDriverOrCustomerFoundListener(txt, driverMode);
                                 }
                             }
                         }
@@ -108,6 +108,7 @@ public abstract class MapFragmentTemplate extends Fragment {
                 }
                 else
                 {
+                    txt.setText("Looking for drivers...");
                     requestButton.setEnabled(false);
                     // Customers
                     rootNode.child("Customers")
@@ -118,9 +119,9 @@ public abstract class MapFragmentTemplate extends Fragment {
                                     {
                                         if (subSnapshot.getKey().equals(FirebaseConnector.getInstance().getFirebaseAuthInstance().getCurrentUser().getUid()))
                                         {
-
                                             DatabaseReference customerNode = subSnapshot.getRef();
                                             customerNode.updateChildren(UserState.getInstanceDefaults().USER_SEARCH_ACTIVE_STATE);
+                                            setDatabaseDriverOrCustomerFoundListener(txt, driverMode);
                                         }
                                     }
                                 }
@@ -135,7 +136,7 @@ public abstract class MapFragmentTemplate extends Fragment {
         });
     }
 
-    private void setDatabaseDriverOrCustomerFoundListener(boolean driverMode, TextView statusTextDisplay)
+    protected void setDatabaseDriverOrCustomerFoundListener(TextView statusTextDisplay, boolean driverMode)
     {
         DatabaseReference rootNode = FirebaseConnector.getInstance().getFirebaseDatabaseInstance().child("Users");
         if (driverMode)
@@ -150,20 +151,23 @@ public abstract class MapFragmentTemplate extends Fragment {
                 @Override
                 public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                     DataSnapshot child = snapshot;
+                    Log.d("Driver-Matcher", child.getKey());
                     for (DataSnapshot subChild : child.getChildren())
                     {
                         if(subChild.getKey().equals("searchActive"))
                         {
-                            if (subChild.getValue().toString().equals("active"))
+                            if (subChild.getValue().toString().equals("true"))
                             {
+                                Button driverBtn = requestButton;
+                                // Set customer to default, which is false, since we already found them
+                                snapshot.getRef().updateChildren(UserState.getInstanceDefaults().USER_SEARCH_INACTIVE_STATE);
+                                // Set the driver to default as well
+                                DatabaseReference driverHeadRef = rootNode.child("Drivers");
+                                DatabaseReference driver = driverHeadRef.child(FirebaseConnector.getInstance().getFirebaseAuthInstance().getCurrentUser().getUid());
 
-                                subChild.getRef().updateChildren(UserState.getInstanceDefaults().USER_SEARCH_INACTIVE_STATE);
-
-                                DatabaseReference customerRef = rootNode.child("Customers");
-                                DatabaseReference customer = customerRef.child(FirebaseConnector.getInstance().getFirebaseAuthInstance().getCurrentUser().getUid());
-                                customer.getRef().updateChildren(UserState.getInstanceDefaults().USER_SEARCH_INACTIVE_STATE);
-                                requestButton.setEnabled(true);
-                                statusTextDisplay.setText("Driver found! Please wait until the driver gets to you.");
+                                driver.updateChildren(UserState.getInstanceDefaults().USER_SEARCH_INACTIVE_STATE);
+                                driverBtn.setEnabled(true);
+                                statusTextDisplay.setText("Customer found! Please proceed to the location.");
                             }
                         }
                     }
@@ -200,20 +204,23 @@ public abstract class MapFragmentTemplate extends Fragment {
                 @Override
                 public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                     DataSnapshot child = snapshot;
+                    Log.d("Customer-Matcher", child.getKey());
                     for (DataSnapshot subChild : child.getChildren())
                     {
                         if(subChild.getKey().equals("searchActive"))
                         {
-                            if (subChild.getValue().toString().equals("active"))
+                            Log.d("Customer-Matcher", String.format("Found key %s, with a value of %s", subChild.getKey(), subChild.getValue().toString()));
+                            if (subChild.getValue().toString().equals("true"))
                             {
-                                // the search is done since we already found an actively searching driver, therefore set the driver's searchActive attribute to default
-                                subChild.getRef().updateChildren(UserState.getInstanceDefaults().USER_SEARCH_INACTIVE_STATE);
-                                // set the customer's attribute to be default as well, that is inactive
-                                DatabaseReference customerRef = rootNode.child("Customers");
-                                DatabaseReference customer = customerRef.child(FirebaseConnector.getInstance().getFirebaseAuthInstance().getCurrentUser().getUid());
-                                customer.getRef().updateChildren(UserState.getInstanceDefaults().USER_SEARCH_INACTIVE_STATE);
+                                // Set driver to default, which is false, since we already found them
+                                snapshot.getRef().updateChildren(UserState.getInstanceDefaults().USER_SEARCH_INACTIVE_STATE);
+                                // Set the customer to default as well
+                                DatabaseReference customerHeadRef = rootNode.child("Customers");
+                                DatabaseReference customer = customerHeadRef.child(FirebaseConnector.getInstance().getFirebaseAuthInstance().getCurrentUser().getUid());
+                                customer.updateChildren(UserState.getInstanceDefaults().USER_SEARCH_INACTIVE_STATE);
                                 requestButton.setEnabled(true);
                                 statusTextDisplay.setText("Driver found! Please wait until the driver gets to you.");
+
                             }
                         }
                     }

@@ -5,7 +5,7 @@
     android:id="@+id/user_drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserPageFeature.Customers.Views.UserActivities.UserActivity"
+    tools:context=".UserPageFeature.Customers.Views.UserActivities.CustomerActivity"
     >
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -38,7 +38,7 @@
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/userCustomerFragmentContainerView"
-                android:name="com.example.carcab.UserPageFeature.Customers.Views.UserFragments.Home"
+                android:name="com.example.carcab.UserPageFeature.Customers.Views.UserFragments.CustomerHome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:layout="@layout/fragment_home" />
