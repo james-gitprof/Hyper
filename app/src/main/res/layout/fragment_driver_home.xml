@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserPageFeature.Customers.Views.UserFragments.CustomerHome"
-    >
+    tools:context=".UserPageFeature.Drivers.Views.UserFragments.DriverHomeFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +14,7 @@
         <com.mapbox.maps.MapView
             android:layout_width="match_parent"
             android:layout_height="550dp"
-            android:id="@+id/mapView"/>
+            android:id="@+id/driverMapView"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,13 +24,13 @@
             <Button
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/btn_request_pickup"
-                android:text="Request Pick-up"/>
+                android:id="@+id/btn_driver_active"
+                android:text="Go Active"/>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/focusLocation"
+                android:id="@+id/focusDriverLocation"
                 android:layout_margin="20dp"
                 android:src="@drawable/baseline_my_location_24"
                 />
@@ -40,8 +39,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/txt_status"
-            android:text="Click the button to request pickup." />
+            android:id="@+id/driver_txt_status"
+            android:text="You are currently inactive." />
 
     </LinearLayout>
+
 </FrameLayout>
