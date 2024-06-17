@@ -27,7 +27,7 @@ import com.example.carcab.AuthenticateFeature.AuthenticationViews.AuthActivities
 import com.example.carcab.R;
 import com.example.carcab.UserPageFeature.Customers.ViewModels.CustomerViewModel;
 import com.example.carcab.UserPageFeature.Customers.ViewModels.CustomerViewModelHandler;
-import com.example.carcab.UserPageFeature.Customers.Views.UserFragments.Home;
+import com.example.carcab.UserPageFeature.Customers.Views.UserFragments.CustomerHome;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -134,7 +134,7 @@ public class UserActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 boolean isOk = false;
                 if (item.getItemId() == R.id.nav_find_a_driver) {
-                    activityFragmentSwitcher(R.id.userCustomerFragmentContainerView, new Home());
+                    activityFragmentSwitcher(R.id.userCustomerFragmentContainerView, new CustomerHome());
                 }
                 if (item.getItemId() == R.id.nav_user_logout)
                 {
