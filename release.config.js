@@ -1,6 +1,6 @@
 
 const RELEASE_BRANCHES = ["master"];
-const RELEASE_FILES = ["*.apk"]
+const RELEASE_FILES = ["*.gz"]
 const MESSAGE_FORMAT = "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
 
 const config = {

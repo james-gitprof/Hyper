@@ -53,6 +53,10 @@ jobs:
           search_artifacts: true
           workflow_search: true
 
+      - name: Compress artifact
+        run: gzip -cf *.apk > APK_UNCOMPRESS_ME.gz
+          
+
       - name: Release build
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
