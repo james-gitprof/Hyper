@@ -1,16 +1,11 @@
 package com.example.carcab.AuthenticateFeature.AuthenticationComponents.Repository;
 
 import com.example.carcab.BuildConfig;
-//import com.example.carcab.Secrets.Vault;
-//import com.google.firebase.BuildConfig;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class FirebaseConnector {
-    /*
-    WARNING: NOT THREAD-SAFE!!
-     */
     private static FirebaseConnector mSelfFirebase;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
@@ -39,4 +34,5 @@ public class FirebaseConnector {
     {
         return this.mDatabase;
     }
+
 }

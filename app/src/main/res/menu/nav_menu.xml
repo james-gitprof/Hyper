@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/subheader_functions" android:title="Main">
+        <menu>
+            <item
+                android:id="@+id/nav_find_a_driver"
+                android:title="Find a Driver"
+                android:checkable="true"
+                android:icon="@drawable/driver_24px"/>
+        </menu>
+    </item>
     <item android:id="@+id/subheader_account" android:title="Account">
         <menu>
             <item

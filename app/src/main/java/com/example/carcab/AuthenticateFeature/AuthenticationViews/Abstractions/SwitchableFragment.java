@@ -13,12 +13,11 @@ public abstract class SwitchableFragment extends Fragment {
     {
 
     }
-    protected void switchFragment(Fragment fragment)
+    protected void switchFragment(int containerViewId, Fragment fragment)
     {
         FragmentManager fragMan = getActivity().getSupportFragmentManager();
         FragmentTransaction fragTransact = fragMan.beginTransaction();
-
-        fragTransact.replace(R.id.authFragmentContainer, fragment);
+        fragTransact.replace(containerViewId, fragment);
         fragTransact.addToBackStack(null);
         fragTransact.commit();
     }

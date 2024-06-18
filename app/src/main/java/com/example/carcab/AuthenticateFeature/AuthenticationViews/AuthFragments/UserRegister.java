@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.carcab.AuthenticateFeature.AuthenticationComponents.ViewModels.AuthStrictViewModel;
 import com.example.carcab.AuthenticateFeature.AuthenticationViews.Abstractions.AuthFragment;
+import com.example.carcab.BuildConfig;
 import com.example.carcab.R;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
@@ -105,7 +106,7 @@ public class UserRegister extends AuthFragment {
     {
         registerEmailField = ((TextInputLayout) getView().findViewById(R.id.register_email_field)).getEditText();
         registerPasswordField = ((TextInputLayout) getView().findViewById(R.id.register_password_field)).getEditText();
-        registerConfirmPasswordField = ((TextInputLayout) getView().findViewById(R.id.register_confirmpassword_field)).getEditText();
+        registerConfirmPasswordField = ((TextInputLayout) getView().findViewById(R.id.register_password_field)).getEditText();
         progressBar = getView().findViewById(R.id.register_progress);
     }
 
@@ -158,7 +159,7 @@ public class UserRegister extends AuthFragment {
         tappableRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchFragment(new UserLogin());
+                switchFragment(R.id.authFragmentContainer,new UserLogin());
             }
         });
     }

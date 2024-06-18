@@ -14,3 +14,5 @@ app/src/main/java/com/example/carcab/Secrets/*
 .externalNativeBuild
 .cxx
 local.properties
+/gradle.properties
+gradle.properties
