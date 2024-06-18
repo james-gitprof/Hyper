@@ -26,6 +26,12 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
 
+      - name: Add DB key
+        run: echo "DATABASE_API_KEY=${{ secrets.DATABASE_API_KEY }}" >> local.properties
+
+      - name: Add extra key
+        run: echo "MAPBOX_DOWNLOADS_TOKEN=${{ secrets.MAPBOX_DOWNLOADS_TOKEN }}" >> gradle.properties
+
       - name: Gradle permission fix
         run: chmod +x gradlew
 

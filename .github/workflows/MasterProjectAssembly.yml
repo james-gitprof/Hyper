@@ -19,3 +19,6 @@ jobs:
 
   begin-build-assembly:
     uses: ./.github/workflows/ReusableProjectAssembly.yml
+    secrets:
+      DATABASE_API_KEY: ${{ secrets.DATABASE_API_KEY }}
+      MAPBOX_DOWNLOADS_TOKEN: ${{ secrets.MAPBOX_DOWNLOADS_TOKEN }}
