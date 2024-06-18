@@ -27,10 +27,10 @@ jobs:
           distribution: 'adopt'
 
       - name: Add DB key
-        run: echo "${{ secrets.DATABASE_API_KEY }}" >> local.properties
+        run: echo "DATABASE_API_KEY=${{ secrets.DATABASE_API_KEY }}" >> local.properties
 
       - name: Add extra key
-        run: echo "${{ secrets.MAPBOX_DOWNLOADS_TOKEN }}" >> gradle.properties
+        run: echo "MAPBOX_DOWNLOADS_TOKEN=${{ secrets.MAPBOX_DOWNLOADS_TOKEN }}" >> gradle.properties
 
       - name: Gradle permission fix
         run: chmod +x gradlew
