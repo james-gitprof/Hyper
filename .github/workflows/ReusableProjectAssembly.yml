@@ -32,6 +32,9 @@ jobs:
       - name: Add extra key
         run: echo "MAPBOX_DOWNLOADS_TOKEN=${{ secrets.MAPBOX_DOWNLOADS_TOKEN }}" >> gradle.properties
 
+      - name: Add gradle parameters
+        run: echo "android.useAndroidX=true" >> gradle.properties
+
       - name: Gradle permission fix
         run: chmod +x gradlew
 
