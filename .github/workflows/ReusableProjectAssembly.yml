@@ -4,6 +4,11 @@
 name: Project assembly
 on:
   workflow_call:
+    secrets:
+      DATABASE_API_KEY:
+        required: true
+      MAPBOX_DOWNLOADS_TOKEN:
+        required: true
     outputs:
       build-artifact-id:
         value: ${{ jobs.assembly.outputs.accomplished-build-artifact }}
