@@ -18,6 +18,7 @@ jobs:
         MAPBOX_DOWNLOADS_TOKEN: ${{ secrets.MAPBOX_DOWNLOADS_TOKEN }}
 
   Releaser:
+    name: Package Releaser
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -25,6 +26,13 @@ jobs:
       pull-requests: write
     needs: Builder
     steps:
+      - name: Wait on check
+        uses: lewagon/wait-on-check-action@v1.3.4
+        with:
+          ref: ${{ github.ref }}
+          running-workflow-name: Package Releaser
+          repo-token: ${{ secrets.github_token }}
+
       - name: Branch checkout
         uses: actions/checkout@v4.1.5
 
@@ -41,6 +49,9 @@ jobs:
         with:
           name: Hyper.apk
           github-token: ${{ secrets.github_token }}
+          check_artifacts: true
+          search_artifacts: true
+          workflow_search: true
 
       - name: Release build
         env:
