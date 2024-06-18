@@ -4,6 +4,11 @@
 name: Project assembly
 on:
   workflow_call:
+    secrets:
+      DATABASE_API_KEY:
+        required: true
+      MAPBOX_DOWNLOADS_TOKEN:
+        required: true
     outputs:
       build-artifact-id:
         value: ${{ jobs.assembly.outputs.accomplished-build-artifact }}
@@ -23,8 +28,25 @@ jobs:
       - name: Setup JDK environment
         uses: actions/setup-java@v4.2.1
         with:
-          java-version: '17'
-          distribution: 'adopt'
+          java-version: '21'
+          distribution: 'corretto'
+
+      - name: Add DB key
+        env:
+          DATABASE_API_KEY: ${{ secrets.DATABASE_API_KEY }}
+        run: echo "DATABASE_API_KEY=$DATABASE_API_KEY" >> local.properties
+
+      - name: Add extra key
+        env:
+          MAPBOX_DOWNLOADS_TOKEN: ${{ secrets.MAPBOX_DOWNLOADS_TOKEN }}
+        run: echo "MAPBOX_DOWNLOADS_TOKEN=$MAPBOX_DOWNLOADS_TOKEN" >> gradle.properties
+
+      - name: Add gradle parameters
+        run: |
+          echo "android.useAndroidX=true" >> gradle.properties 
+          echo "org.gradle.jvmargs=-Xmx4096m -Dfile.encoding=UTF-8" >> gradle.properties
+          echo "android.nonTransitiveRClass=true" >> gradle.properties
+
 
       - name: Gradle permission fix
         run: chmod +x gradlew

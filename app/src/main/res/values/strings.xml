@@ -1,3 +1,36 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!--
     <string name="app_name">Hyper</string>
+
+    Use App_Name instead
+    -->
+
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_main2">MainActivity2</string>
+
+    <string name="App_Name">CarCab</string>
+    <string name="Fragment_Authentication_Login">Login</string>
+    <string name="Fragment_Authentication_Login_Header">User Login</string>
+
+    <string name="Fragment_Authentication_Register">Register</string>
+    <string name="Fragment_Authentication_Register_Header">User Registration</string>
+
+    <string name="Authentication_Hint_Email">E-mail</string>
+    <string name="Authentication_Hint_Confirmation_Password">Confirm Password</string>
+    <string name="Authentication_Hint_Password">Password</string>
+
+    <string name="Authentication_Card_Person">Customer</string>
+    <string name="Authentication_Card_Driver">Driver</string>
+
+    <string name="Authentication_Greeter">Welcome!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="Acknowledgement_Action">Dismiss</string>
+
+
+    <string name="mapbox_access_token" translatable="false" tools:ignore="UnusedResources">
+            pk.eyJ1Ijoidm9uY2hleiIsImEiOiJjbHhka2NhYzQwNnY4MmpwemVkeGs3M2NsIn0.bQZ5LsR753Fvq-AjPxalkg
+    </string>
+
 </resources>

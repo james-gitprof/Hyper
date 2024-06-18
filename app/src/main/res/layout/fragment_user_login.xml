@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".AuthenticateFeature.AuthenticationViews.AuthFragments.UserLogin">
+
+    <!--
+     Header
+    -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="24dp"
+            android:orientation="vertical"
+            android:id="@+id/user_auth_login_header"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="140dp"
+                android:layout_height="113dp"
+                android:src="@drawable/logo" />
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:id="@+id/login_progress"
+                android:visibility="gone"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter"
+                android:padding="12dp"
+                android:text="@string/Fragment_Authentication_Login_Header"
+                android:textSize="24sp" />
+
+        </LinearLayout>
+
+        <!--
+        Form
+        -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginVertical="12dp"
+            android:layout_below="@id/user_auth_login_header"
+            android:id="@+id/auth_login_layout"
+            android:paddingHorizontal="32dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/login_email_field"
+                android:hint="@string/Authentication_Hint_Email">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:inputType="textEmailAddress"
+                    android:paddingStart="20dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:hint="@string/Authentication_Hint_Password"
+                android:id="@+id/login_password_field"
+                app:endIconMode="password_toggle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:inputType="textPassword"
+                    android:paddingStart="20dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <Button
+                android:id="@+id/login_button"
+                android:layout_width="257dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/btn_bg"
+                android:fontFamily="@font/inter_semibold"
+                android:text="@string/Fragment_Authentication_Login"
+                android:textColor="@color/white"
+                android:textColorLink="#000000" />
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:gravity="center_horizontal">
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="12dp"
+                   android:text="Create an account"
+                   android:fontFamily="@font/inter"
+                   android:id="@+id/register_text_clickable"
+                   android:textColor="@color/linkTextType"/>
+
+               <!--
+                Forgot password? Maybe later
+                -->
+           </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>

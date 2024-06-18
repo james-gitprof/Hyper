@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserPageFeature.Customers.Views.UserFragments.CustomerHome"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.mapbox.maps.MapView
+            android:layout_width="match_parent"
+            android:layout_height="550dp"
+            android:id="@+id/mapView"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <Button
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_request_pickup"
+                android:text="Request Pick-up"/>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/focusLocation"
+                android:layout_margin="20dp"
+                android:src="@drawable/baseline_my_location_24"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_status"
+            android:text="Click the button to request pickup." />
+
+    </LinearLayout>
+</FrameLayout>

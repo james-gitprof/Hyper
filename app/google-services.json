@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "414211146634",
+    "project_id": "carcab-97182",
+    "storage_bucket": "carcab-97182.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:414211146634:android:c352b6c9b6c0292f103e73",
+        "android_client_info": {
+          "package_name": "com.example.carcab"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCw-1H2I6QhlOLYo7XKHb_lTa1w-nrVoG8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
