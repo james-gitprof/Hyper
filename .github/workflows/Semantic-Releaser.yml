@@ -13,7 +13,7 @@ jobs:
   Builder:
       name: Initiate builder workflow
       uses: ./.github/workflows/ReusableProjectAssembly.yml
-      secrets:
+      with:
         DATABASE_API_KEY: ${{ secrets.DATABASE_API_KEY }}
         MAPBOX_DOWNLOADS_TOKEN: ${{ secrets.MAPBOX_DOWNLOADS_TOKEN }}
 

@@ -27,10 +27,14 @@ jobs:
           distribution: 'adopt'
 
       - name: Add DB key
-        run: echo "DATABASE_API_KEY=${{ secrets.DATABASE_API_KEY }}" >> local.properties
+        env:
+          DATABASE_API_KEY: ${{ secrets.DATABASE_API_KEY }}
+        run: echo "DATABASE_API_KEY=$DATABASE_API_KEY" >> local.properties
 
       - name: Add extra key
-        run: echo "MAPBOX_DOWNLOADS_TOKEN=${{ secrets.MAPBOX_DOWNLOADS_TOKEN }}" >> gradle.properties
+        env:
+          MAPBOX_DOWNLOADS_TOKEN: ${{ secrets.MAPBOX_DOWNLOADS_TOKEN }}
+        run: echo "MAPBOX_DOWNLOADS_TOKEN=$MAPBOX_DOWNLOADS_TOKEN" >> gradle.properties
 
       - name: Add gradle parameters
         run: echo "android.useAndroidX=true" >> gradle.properties
